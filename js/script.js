@@ -56,9 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const typedTextElement = document.querySelector('.typed-text');
     const titles = [
         "Software Engineer",
-        "Data Scientist",
-        "AI & Machine Learning Engineer",
-        "CEO & Founder"
+        "Data Analyst",
+        "Cybersecurity"
     ];
     let titleIndex = 0;
     let charIndex = 0;
