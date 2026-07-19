@@ -55,9 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Typing Animation
     const typedTextElement = document.querySelector('.typed-text');
     const titles = [
-        "Software Engineer",
-        "Data Analyst",
-        "Cybersecurity"
+        "Full Stack Software Engineer",
+        "Data Analyst"
     ];
     let titleIndex = 0;
     let charIndex = 0;
