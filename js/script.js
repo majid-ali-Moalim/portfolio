@@ -1,69 +1,90 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Mobile Menu Toggle
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
 
-    if (mobileMenuBtn) {
+    const closeMobileMenu = () => {
+        if (navLinks) {
+            navLinks.classList.remove('active');
+        }
+        if (mobileMenuBtn) {
+            mobileMenuBtn.classList.remove('active');
+        }
+    };
+
+    if (mobileMenuBtn && navLinks) {
         mobileMenuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
             mobileMenuBtn.classList.toggle('active');
         });
+
+        navLinks.querySelectorAll('a[href^="#"]').forEach((link) => {
+            link.addEventListener('click', closeMobileMenu);
+        });
     }
 
-    // Theme Toggle Logic
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.body;
-    const icon = themeToggle.querySelector('i');
 
-    const toggleTheme = () => {
-        if (body.classList.contains('dark-theme')) {
+    if (themeToggle) {
+        const icon = themeToggle.querySelector('i');
+
+        const toggleTheme = () => {
+            if (!icon) {
+                return;
+            }
+
+            if (body.classList.contains('dark-theme')) {
+                body.classList.remove('dark-theme');
+                body.classList.add('light-theme');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.classList.remove('light-theme');
+                body.classList.add('dark-theme');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        };
+
+        themeToggle.addEventListener('click', toggleTheme);
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light' && icon) {
             body.classList.remove('dark-theme');
             body.classList.add('light-theme');
             icon.classList.remove('fa-moon');
             icon.classList.add('fa-sun');
-            localStorage.setItem('theme', 'light');
-        } else {
-            body.classList.remove('light-theme');
-            body.classList.add('dark-theme');
-            icon.classList.remove('fa-sun');
-            icon.classList.add('fa-moon');
-            localStorage.setItem('theme', 'dark');
         }
-    };
-
-    themeToggle.addEventListener('click', toggleTheme);
-
-    // Check saved theme
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-        body.classList.remove('dark-theme');
-        body.classList.add('light-theme');
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
     }
 
-    // Navbar Scroll Effect
     const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
+    if (navbar) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    }
 
-    // Typing Animation
     const typedTextElement = document.querySelector('.typed-text');
     const titles = [
-        "Full Stack Software Engineer",
-        "Data Analyst"
+        'Full Stack Software Engineer',
+        'Data Analyst'
     ];
     let titleIndex = 0;
-    let charIndex = 0;
+    let charIndex = typedTextElement ? typedTextElement.textContent.length : 0;
     let isDeleting = false;
     let typingSpeed = 100;
 
     function type() {
+        if (!typedTextElement) {
+            return;
+        }
+
         const currentTitle = titles[titleIndex];
 
         if (isDeleting) {
@@ -78,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!isDeleting && charIndex === currentTitle.length) {
             isDeleting = true;
-            typingSpeed = 2000; // Pause at end
+            typingSpeed = 2000;
         } else if (isDeleting && charIndex === 0) {
             isDeleting = false;
             titleIndex = (titleIndex + 1) % titles.length;
@@ -89,29 +110,64 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (typedTextElement) {
-        type();
+        setTimeout(type, 1500);
     }
 
-    // Fade-in Animations on Scroll
-    const observerOptions = {
-        threshold: 0.1
+    const revealElement = (element) => {
+        element.classList.add('fade-in-visible');
+        element.classList.remove('fade-in-hidden');
     };
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('fade-in-visible');
+    const animatedElements = document.querySelectorAll('.section, .service-card, .project-card, .skill-group');
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    revealElement(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08 });
+
+        animatedElements.forEach((el) => {
+            el.classList.add('fade-in-hidden');
+            observer.observe(el);
+
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                revealElement(el);
+                observer.unobserve(el);
             }
         });
-    }, observerOptions);
+    } else {
+        animatedElements.forEach(revealElement);
+    }
 
-    const animatedElements = document.querySelectorAll('.section, .service-card, .project-card, .skill-group');
-    animatedElements.forEach(el => {
-        el.classList.add('fade-in-hidden');
-        observer.observe(el);
+    setTimeout(() => {
+        animatedElements.forEach((el) => {
+            if (!el.classList.contains('fade-in-visible')) {
+                revealElement(el);
+            }
+        });
+    }, 800);
+
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', (event) => {
+            const targetId = anchor.getAttribute('href');
+            if (!targetId || targetId === '#') {
+                return;
+            }
+
+            const targetElement = document.querySelector(targetId);
+            if (!targetElement) {
+                return;
+            }
+
+            event.preventDefault();
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+        });
     });
 
-    // Contact Form Submission
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
@@ -123,7 +179,6 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.textContent = 'Sending...';
             btn.disabled = true;
 
-            // Simulate API call
             setTimeout(() => {
                 alert('Thank you! Your message has been sent successfully.');
                 contactForm.reset();
@@ -133,24 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Dynamic Copyright Year
     const yearSpan = document.getElementById('current-year');
     if (yearSpan) {
         yearSpan.textContent = new Date().getFullYear();
     }
-
-    // Smooth Scroll for Footer Links
-    document.querySelectorAll('.footer-links a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
 });
