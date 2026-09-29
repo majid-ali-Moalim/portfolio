@@ -1,0 +1,5 @@
+/* Keep the original style.css as-is via /public/css/style.css */
+/* Extra global overrides for Next.js */
+* {
+  box-sizing: border-box;
+}

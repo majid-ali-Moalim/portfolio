@@ -1,0 +1,337 @@
+{
+  "profile": {
+    "id": 1,
+    "name": "Abdimajid Ali Moalim",
+    "title": "Full Stack Software Engineer, Data Analyst & Cybersecurity",
+    "bio": "Tech professional with 4+ years of experience specialized in building scalable platforms, cybersecurity, and data-centric solutions.",
+    "email": "majidalimoalim@gmail.com",
+    "phone": "+252 61 9534042",
+    "location": "Mogadishu, Somalia",
+    "yearsExperience": "4+",
+    "projectsCompleted": "12+",
+    "happyClients": "0"
+  },
+  "services": [
+    {
+      "id": 5,
+      "createdAt": "2026-09-29T20:55:15.865Z",
+      "title": "Cybersecurity Services",
+      "description": "We provide cybersecurity solutions to help businesses protect their applications, networks, systems, and sensitive data from digital threats. Our services focus on identifying security weaknesses, reducing risks, implementing security best practices, and improving overall system protection.",
+      "icon": "fas fa-shield-alt",
+      "bullets": [
+        "Web application security assessment",
+        "Network security configuration and monitoring",
+        "Vulnerability assessment and security testing",
+        "Security audits and risk assessment",
+        "AWS cloud security and IAM configuration",
+        "Access control and authentication security",
+        "Database security and data protection",
+        "Firewall and security group configuration",
+        "Security best practices and hardening",
+        "Basic incident response and troubleshooting",
+        "Security awareness and guidance",
+        "Security recommendations and remediation support"
+      ],
+      "category": "Cybersecurity",
+      "images": [],
+      "date": "2026-02-25",
+      "additionalInfo": "We help startups, businesses, and organizations strengthen their digital security through authorized security assessments and practical protection measures. All security testing is performed with appropriate permission and within an agreed scope."
+    },
+    {
+      "id": 4,
+      "createdAt": "2026-09-29T20:51:55.872Z",
+      "title": "Cloud Computing & AWS Solution",
+      "description": "We provide cloud computing solutions using Amazon Web Services (AWS) to help businesses build, deploy, secure, and scale their applications. We design reliable cloud infrastructure that improves availability, supports business growth, and helps optimize operational costs.",
+      "icon": "fas fa-code",
+      "bullets": [
+        "AWS cloud infrastructure setup and configuration",
+        "VPC, public and private subnet configuration",
+        "EC2 instance deployment and management",
+        "S3 storage and static website hosting",
+        "Application Load Balancer (ALB) configuration",
+        "Auto Scaling for application availability and traffic management",
+        "Amazon RDS and DynamoDB database integration",
+        "CloudFront CDN and Route 53 DNS configuration",
+        "IAM users, roles, and permissions management",
+        "CloudWatch monitoring and SNS alerts",
+        "CI/CD pipeline setup for automated deployments",
+        "Cloud security, cost optimization, and troubleshooting"
+      ],
+      "category": "SaaS & Cloud",
+      "images": [],
+      "date": "2025-09-18",
+      "additionalInfo": "We help startups, small businesses, and organizations move to the cloud and manage their AWS infrastructure. Our services include cloud architecture design, application deployment, infrastructure monitoring, and ongoing technical support tailored to your project requirements."
+    },
+    {
+      "id": 3,
+      "createdAt": "2026-09-29T20:49:02.390Z",
+      "title": "Web Application Development",
+      "description": "We develop modern, responsive, and secure web applications tailored to your business needs. Using modern web technologies, we create scalable applications that work smoothly across desktops, tablets, and mobile devices. From frontend development to backend systems and database integration, we deliver complete web solutions.",
+      "icon": "fas fa-globe",
+      "bullets": [
+        "Responsive website and web application development",
+        "Frontend development using React.js and Next.js",
+        "Backend development using Node.js and Express.js",
+        "REST API development and integration",
+        "Database design and integration using PostgreSQL, MySQL, and MongoDB",
+        "User authentication and authorization",
+        "Admin dashboards and management systems",
+        "Third-party service and payment gateway integration",
+        "Website performance and security optimization",
+        "Testing, deployment, and ongoing maintenance"
+      ],
+      "category": "Development",
+      "images": [],
+      "date": "2024-03-07",
+      "additionalInfo": "We build customized web applications for startups, small businesses, and established organizations. Whether you need a business website, an e-commerce platform, a dashboard, or a complete web-based management system, we can help turn your idea into a working solution."
+    },
+    {
+      "id": 2,
+      "createdAt": "2026-09-29T20:47:04.638Z",
+      "title": "Mobile App",
+      "description": "We build modern, high-performance mobile applications for Android and iOS using React Native. Our applications provide smooth user experiences, responsive interfaces, and reliable performance while allowing businesses to reach users on both platforms with a shared codebase.",
+      "icon": "fas fa-mobile-alt",
+      "bullets": [
+        "Cross-platform Android and iOS app development using React Native",
+        "Mobile UI development using React Native components",
+        "Navigation and screen management using React Navigation",
+        "API integration using REST APIs",
+        "Backend and database integration",
+        "User authentication and authorization",
+        "Google Sign-In integration",
+        "Push notifications and real-time features",
+        "Mobile app testing and debugging",
+        "App deployment to Google Play Store and Apple App Store",
+        "App maintenance, updates, and performance optimization"
+      ],
+      "category": "Mobile Apps",
+      "date": "2024-12-28",
+      "additionalInfo": "We specialize in React Native mobile application development, helping startups, businesses, and organizations turn their ideas into functional mobile apps. Contact us to discuss your project requirements, features, timeline, and budget."
+    },
+    {
+      "id": 1,
+      "createdAt": "2026-09-29T18:28:35.815Z",
+      "title": "Aamin Ambulance Dispatch System",
+      "description": "A centralized web-based emergency ambulance dispatch system designed to manage ambulance requests, dispatch operations, ambulance teams, hospitals, and patient cases from request to case completion.",
+      "icon": "fas fa-ambulance",
+      "bullets": [
+        "Emergency, non-emergency, and referral request management",
+        "Real-time dispatch and mission management",
+        "Ambulance, driver, and nurse assignment",
+        "Driver and nurse case workflows",
+        "Hospital coordination and patient handover",
+        "Patient and medical case management",
+        "Role-based access control and permissions",
+        "Reports, analytics, and case history"
+      ],
+      "category": "Development"
+    }
+  ],
+  "projects": [
+    {
+      "id": 2,
+      "createdAt": "2026-09-29T19:03:09.388Z",
+      "title": "Aamin Ambulance Dispatch System (AADS)",
+      "description": "A centralized web-based ambulance dispatch system developed for Aamin Ambulance Somalia to manage emergency, non-emergency, and referral cases from the initial request through ambulance dispatch, patient care, hospital coordination, and case completion.",
+      "bullets": [
+        "Emergency, non-emergency, and referral request management",
+        "Dispatcher dashboard for case and mission management",
+        "Ambulance, driver, and nurse assignment",
+        "Driver and nurse workflow management",
+        "Patient and medical case records",
+        "Hospital coordination and patient handover",
+        "Role-based authentication and permissions",
+        "Case status tracking and activity history",
+        "Reports and operational analytics",
+        "Responsive web interface for different system roles"
+      ],
+      "techStack": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "shadcn/ui",
+        "NestJS",
+        "Node.js",
+        "PostgreSQL",
+        "Prisma",
+        "JWT",
+        "REST API",
+        "Swagger"
+      ],
+      "imageUrl": "/uploads/1790708532143_Aamin_Ambulance_Logo.png",
+      "githubUrl": "https://github.com/majid-ali-Moalim/aaminV002",
+      "liveUrl": "",
+      "category": "Emergency Healthcare / Full-Stack Web Application",
+      "featured": true
+    },
+    {
+      "id": 1,
+      "createdAt": "2026-09-29T18:34:30.708Z",
+      "title": "AMLAK – Property & Vehicle Marketplace",
+      "description": "AMLAK  is a full-stack SaaS marketplace designed to connect customers with verified Dalaal brokers and property or vehicle owners. The platform supports property, land, vehicle, business, and other marketplace listings while providing Dalaal profiles, verification, lead management, meeting scheduling, trust scoring, and subscription-based services.",
+      "bullets": [
+        "Full-stack property and vehicle marketplace for the Somali market",
+        "Role-based platform for Customers, Dalaals, and Administrators",
+        "Property, land, apartment, vehicle, and business listings",
+        "Dalaal verification and Trust Score system",
+        "Lead management and meeting scheduling workflow",
+        "Subscription-based services for Dalaals",
+        "Google OAuth and secure authentication",
+        "Image upload and listing media management",
+        "REST API built with NestJS and Prisma",
+        "PostgreSQL database with scalable data architecture",
+        "Responsive Next.js and Tailwind CSS frontend",
+        "Designed for Somalia, Kenya, and the Somali diaspora"
+      ],
+      "techStack": [
+        "Next.js",
+        "React",
+        "Tailwind CSS",
+        "NestJS",
+        "Node.js",
+        "Prisma",
+        "PostgreSQL",
+        "Neon",
+        "TypeScript",
+        "Google OAuth",
+        "Kinde Auth",
+        "ImageKit"
+      ],
+      "githubUrl": "https://github.com/majid-ali-Moalim",
+      "liveUrl": "",
+      "category": "Full-Stack SaaS / Real Estate & Vehicle Marketplace",
+      "featured": true,
+      "imageUrl": "/uploads/1790708749677_Amlak.png"
+    }
+  ],
+  "achievements": [
+    {
+      "id": 1,
+      "createdAt": "2026-09-29T20:19:25.585Z",
+      "title": "Bile Initiative Cloud Computing Training – Professional Experience & Networking",
+      "description": "Successfully completed a two-week intensive Cloud Computing training program through the Bile Initiative. Beyond the technical training, the program provided a valuable opportunity to connect with other young technology professionals, work collaboratively in teams, exchange ideas, and develop leadership and professional communication skills.",
+      "bullets": [
+        "Built meaningful professional connections with fellow technology participants.",
+        "Worked with diverse team members on practical training activities and discussions.",
+        "Strengthened teamwork, collaboration, and communication skills.",
+        "Gained valuable experience working in a professional learning environment.",
+        "Shared ideas and learned from the experiences of other participants.",
+        "Developed leadership and problem-solving skills through team activities.",
+        "Expanded my professional network within Somalia's technology community."
+      ],
+      "tags": [
+        "Networking",
+        "Teamwork",
+        "Leadership",
+        "Collaboration",
+        "Professional Development",
+        "Experience",
+        "Communication",
+        "Community"
+      ],
+      "imageUrl": "/uploads/1790713074627_Bile_initative_cloud_track_tabaarack_.png",
+      "category": "Development",
+      "date": "2026-09-03",
+      "images": [
+        "/uploads/1790713108909_bile.png",
+        "/uploads/1790713342059_bile.png"
+      ],
+      "additionalInfo": "The Bile Initiative was an important professional experience that allowed me to grow beyond technical knowledge by building relationships, learning from others, collaborating as a team, and developing confidence and leadership skills. I am grateful for the opportunity and the connections made during the program."
+    }
+  ],
+  "certifications": [
+    {
+      "id": 3,
+      "createdAt": "2026-09-29T20:39:59.042Z",
+      "title": "7 Days AI Bootcamp: From Zero to ML Hero",
+      "issuer": "AI Somalia Community in collaboration with Zamzam University of Science and Technology",
+      "issueDate": "2025-12-05",
+      "description": "Successfully completed the 7 Days AI Bootcamp: From Zero to ML Hero, organized by AI Somalia Community in collaboration with Zamzam University of Science and Technology. The bootcamp provided hands-on training in Python fundamentals, Machine Learning concepts, and basic Machine Learning application development.",
+      "imageUrl": "/uploads/1790714331879_Somali-AI.png",
+      "tags": [
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Python",
+        "Machine Learning Concepts",
+        "ML Application Development",
+        "AI",
+        "Python Programming"
+      ],
+      "credentialId": "",
+      "credentialUrl": "",
+      "date": "2025-12-05",
+      "additionalInfo": "The bootcamp was held from November 29 to December 5, 2025. This experience strengthened my interest in Artificial Intelligence and Machine Learning and provided practical exposure to Python and foundational ML concepts."
+    },
+    {
+      "id": 2,
+      "createdAt": "2026-09-29T20:11:48.344Z",
+      "title": "Bile Initiative – Cloud Computing Training",
+      "issuer": "Bile Initiative",
+      "issueDate": "2026-09-03",
+      "description": "Successfully completed a two-week intensive professional training program in Cloud Computing through the Bile Initiative. The training focused on building practical and industry-relevant cloud computing skills, including cloud concepts, AWS fundamentals, EC2, cloud architecture, networking, security, infrastructure, scalability, and cloud services.",
+      "imageUrl": "/uploads/1790712670827_Bileintiative.jpg",
+      "tags": [
+        "Cloud Computing",
+        "AWS",
+        "EC2",
+        "Cloud Architecture",
+        "Networking",
+        "Linux",
+        "Virtualization",
+        "Cloud Security",
+        "IAM",
+        "Cloud Storage",
+        "Scalability",
+        "Infrastructure"
+      ],
+      "credentialId": "",
+      "credentialUrl": "",
+      "date": "2026-09-03",
+      "additionalInfo": "Additional Information / Notes:\nTwo-week intensive professional training delivered as part of the Bile Initiative's third-year program, designed to strengthen practical technical and industry skills in Cloud Computing and prepare participants for future technology careers in Somalia."
+    },
+    {
+      "id": 1,
+      "createdAt": "2026-09-29T19:55:01.584Z",
+      "title": "SomNOG9 Cybersecurity Workshop & Tutorials",
+      "issuer": "Somali Network Operators Group (SomNOG)",
+      "issueDate": "September 25, 2026",
+      "description": "Successfully completed the **SomNOG9 Cybersecurity Workshop**, held from **19–21 September 2026** at **Somali National University, KM4 Campus, Mogadishu**. The three-day practical cybersecurity track was designed for final-year students, fresh graduates, and early-career ICT professionals, with approximately **60–70% hands-on learning** in an authorized isolated lab environment.\n\nThe workshop covered **cybersecurity foundations, networking for security, Linux security, reconnaissance and footprinting, network scanning and enumeration, vulnerability assessment, web application security, penetration testing, SOC operations, SIEM, threat analysis, incident response, risk mitigation, and basic digital forensics**. Practical exercises introduced tools and technologies including **Nmap, Wireshark, OWASP Juice Shop, Metasploit, Linux security utilities, KQL, and Wazuh**.\n\nThe training also included **CTF competitions, controlled security testing, attack analysis, and defensive security exercises**, providing practical exposure to real-world cybersecurity concepts and operational security practices.\n",
+      "imageUrl": "/uploads/1790712804965_SomNOG9_Cybersecurity_Workshop___Tutorials.jpg",
+      "tags": [
+        "Cybersecurity",
+        "Network Security",
+        "Ethical Hacking",
+        "Web Security",
+        "Network Reconnaissance",
+        "Vulnerability Assessment",
+        "Penetration Testing",
+        "SOC Operations",
+        "SIEM",
+        "Incident Response",
+        "Digital Forensics",
+        "Linux Security",
+        "Nmap",
+        "Wireshark",
+        "OWASP",
+        "Metasploit",
+        "Wazuh",
+        "SomNOG9"
+      ],
+      "credentialId": "",
+      "credentialUrl": ""
+    }
+  ],
+  "posts": [],
+  "skills": [],
+  "experiences": [],
+  "educations": [],
+  "messages": [],
+  "socialLinks": [],
+  "siteSettings": {
+    "id": 1,
+    "siteTitle": "Abdimajid Ali Moalim | Portfolio",
+    "contactEmail": "majidalimoalim@gmail.com",
+    "contactPhone": "+252 61 9534042",
+    "footerText": "© 2026 Abdimajid Ali Moalim. All rights reserved."
+  }
+}

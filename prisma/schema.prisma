@@ -1,0 +1,175 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String   // hashed with bcryptjs
+  createdAt DateTime @default(now())
+}
+
+model Profile {
+  id                Int      @id @default(1)
+  name              String   @default("Abdimajid Ali Moalim")
+  title             String   @default("Full Stack Software Engineer, Data Analyst & Cybersecurity")
+  bio               String   @default("Tech professional with 4+ years of experience specialized in building scalable platforms, cybersecurity, and data-centric solutions.")
+  email             String   @default("majidalimoalim@gmail.com")
+  phone             String   @default("+252 61 9534042")
+  location          String   @default("Mogadishu, Somalia")
+  avatarUrl         String?  @default("/images/myimage.png")
+  cvUrl             String?  @default("/images/Abdimajid_Ali_Moalim_CV.pdf")
+  yearsExperience   String   @default("4+")
+  projectsCompleted String   @default("15+")
+  happyClients      String   @default("20+")
+  updatedAt         DateTime @updatedAt
+}
+
+model Service {
+  id             Int      @id @default(autoincrement())
+  title          String?  @default("")
+  description    String?  @default("")
+  icon           String?  @default("fas fa-code")
+  bullets        String[]
+  category       String?  @default("Development")
+  date           String?
+  additionalInfo String?
+  images         String[]
+  createdAt      DateTime @default(now())
+}
+
+model Project {
+  id             Int      @id @default(autoincrement())
+  title          String?  @default("")
+  description    String?  @default("")
+  bullets        String[]
+  techStack      String[]
+  imageUrl       String?
+  images         String[]
+  githubUrl      String?
+  liveUrl        String?
+  category       String?  @default("Full Stack")
+  featured       Boolean  @default(true)
+  date           String?
+  additionalInfo String?
+  createdAt      DateTime @default(now())
+}
+
+model Achievement {
+  id             Int      @id @default(autoincrement())
+  title          String?  @default("")
+  description    String?  @default("")
+  bullets        String[]
+  tags           String[]
+  category       String?  @default("General")
+  date           String?
+  imageUrl       String?
+  images         String[]
+  additionalInfo String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Certification {
+  id             Int      @id @default(autoincrement())
+  title          String?  @default("")
+  description    String?
+  issuer         String?  @default("")
+  issueDate      String?  @default("")
+  credentialId   String?
+  credentialUrl  String?
+  imageUrl       String?
+  images         String[]
+  tags           String[]
+  date           String?
+  additionalInfo String?
+  createdAt      DateTime @default(now())
+}
+
+model Post {
+  id             Int      @id @default(autoincrement())
+  title          String?  @default("")
+  slug           String?
+  snippet        String?  @default("")
+  content        String?  @default("")
+  tags           String[]
+  published      Boolean  @default(true)
+  date           String?
+  additionalInfo String?
+  images         String[]
+  createdAt      DateTime @default(now())
+}
+
+model Skill {
+  id             Int      @id @default(autoincrement())
+  name           String?  @default("")
+  category       String?  // Programming & Backend, Mobile Development, Data Analytics & AI, Cybersecurity & Security, Cloud & DevOps, Other
+  icon           String?
+  proficiency    Int      @default(90)
+  date           String?
+  additionalInfo String?
+  createdAt      DateTime @default(now())
+}
+
+model Experience {
+  id             Int      @id @default(autoincrement())
+  company        String?  @default("")
+  role           String?  @default("")
+  location       String?
+  startDate      String?  @default("")
+  endDate        String?  @default("Present")
+  description    String?  @default("")
+  bullets        String[]
+  date           String?
+  additionalInfo String?
+  createdAt      DateTime @default(now())
+}
+
+model Education {
+  id             Int      @id @default(autoincrement())
+  institution    String?  @default("")
+  degree         String?  @default("")
+  fieldOfStudy   String?
+  startDate      String?  @default("")
+  endDate        String?  @default("")
+  description    String?
+  date           String?
+  additionalInfo String?
+  createdAt      DateTime @default(now())
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  name      String?  @default("")
+  email     String?  @default("")
+  subject   String?
+  message   String?  @default("")
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model SocialLink {
+  id             Int      @id @default(autoincrement())
+  platform       String?  // LinkedIn, GitHub, X, Blog, etc.
+  url            String?  @default("")
+  icon           String?  @default("fas fa-link")
+  additionalInfo String?
+  createdAt      DateTime @default(now())
+}
+
+model SiteSetting {
+  id           Int      @id @default(1)
+  siteTitle    String   @default("Abdimajid Ali Moalim | Portfolio")
+  contactEmail String   @default("majidalimoalim@gmail.com")
+  contactPhone String   @default("+252 61 9534042")
+  footerText   String   @default("© 2026 Abdimajid Ali Moalim. All rights reserved.")
+  updatedAt    DateTime @updatedAt
+}
