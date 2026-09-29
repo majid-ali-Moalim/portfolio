@@ -43,6 +43,7 @@ model Service {
   date           String?
   additionalInfo String?
   images         String[]
+  percentage     Int?
   createdAt      DateTime @default(now())
 }
 

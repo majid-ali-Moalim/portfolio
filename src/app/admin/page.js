@@ -141,7 +141,7 @@ export default function AdminDashboard() {
       setModalData(copy);
     } else {
       switch (activeTab) {
-        case 'services': setModalData({ title: '', description: '', icon: 'fas fa-code', bullets: '', category: 'Development', images: [], date: '' }); break;
+        case 'services': setModalData({ title: '', description: '', icon: 'fas fa-code', bullets: '', category: 'Development', images: [], date: '', percentage: '' }); break;
         case 'projects': setModalData({ title: '', description: '', bullets: '', techStack: '', imageUrl: '', githubUrl: '', liveUrl: '', category: 'Full Stack', featured: true }); break;
         case 'achievements': setModalData({ title: '', description: '', bullets: '', tags: '', imageUrl: '', category: 'General', date: '' }); break;
         case 'certifications': setModalData({ title: '', issuer: '', issueDate: '', description: '', imageUrl: '', tags: '', credentialId: '', credentialUrl: '' }); break;
@@ -398,6 +398,7 @@ export default function AdminDashboard() {
                   />
                   <FormField label="FontAwesome Icon (e.g. fas fa-code)" value={modalData.icon || ''} onChange={(v) => setModalData({ ...modalData, icon: v })} isDark={isDark} />
                   <MultipleImageUploadField label="Upload Service Images (Optional - first image shown as cover)" value={modalData.images || []} onChange={(v) => setModalData({ ...modalData, images: v })} isDark={isDark} />
+                  <FormField label="Percentage / Proficiency (0-100, Optional)" type="number" value={modalData.percentage || ''} onChange={(v) => setModalData({ ...modalData, percentage: v ? parseInt(v) : null })} isDark={isDark} />
                   <FormField label="Posted Date / Date (Optional)" type="date" value={modalData.date || ''} onChange={(v) => setModalData({ ...modalData, date: v })} isDark={isDark} />
                   <FormTextarea label="Description (Optional)" value={modalData.description || ''} onChange={(v) => setModalData({ ...modalData, description: v })} isDark={isDark} />
                   <FormTextarea label="Bullet Points (One per line)" value={modalData.bullets || ''} onChange={(v) => setModalData({ ...modalData, bullets: v })} isDark={isDark} />

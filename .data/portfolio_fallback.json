@@ -241,6 +241,27 @@
   ],
   "certifications": [
     {
+      "id": 4,
+      "createdAt": "2026-09-29T21:05:43.151Z",
+      "title": "How to Run Your University Thesis: A Sample Step-by-Step Guide to Success",
+      "issuer": "Somali National University (SNU) — Students' Club",
+      "issueDate": "2025-11-30",
+      "description": "Certificate of Participation awarded to Abdimajid Ali Moalim in recognition of successful participation in the seminar titled “How to Run Your University Thesis: A Sample Step-by-Step Guide to Success.” The seminar was held on 30 November at KM4 University Hall and organized by the Students' Club of Somali National University.",
+      "imageUrl": "/uploads/1790715850719_certifcation.jpg",
+      "tags": [
+        "Academic Presentation",
+        "Thesis Preparation",
+        "Public Speaking",
+        "Research Skills",
+        "Communication",
+        "Presentation Skills"
+      ],
+      "credentialId": "",
+      "credentialUrl": "",
+      "additionalInfo": "The session was delivered by Prof. Osman Mohamed Abdirahman, DVM, PhD, Member of the National Higher Education Committee. This certificate recognizes participation in an academic seminar focused on thesis preparation and successful university presentations.",
+      "date": "2025-11-30"
+    },
+    {
       "id": 3,
       "createdAt": "2026-09-29T20:39:59.042Z",
       "title": "7 Days AI Bootcamp: From Zero to ML Hero",

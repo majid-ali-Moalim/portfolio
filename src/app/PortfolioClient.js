@@ -390,6 +390,19 @@ export default function PortfolioClient({ data = {} }) {
                         <i className="far fa-calendar-alt" style={{ marginRight: '5px' }}></i>
                         {formatCardDate(srv.date, srv.createdAt)}
                       </div>
+                      
+                      {srv.percentage != null && (
+                        <div style={{ marginBottom: '12px', textAlign: 'left' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px', fontSize: '0.75rem', fontWeight: '600', color: isLightTheme ? '#0f172a' : '#f8f9fa' }}>
+                            <span>Proficiency</span>
+                            <span>{srv.percentage}%</span>
+                          </div>
+                          <div style={{ width: '100%', height: '5px', background: isLightTheme ? '#e2e8f0' : 'rgba(255,255,255,0.1)', borderRadius: '10px', overflow: 'hidden' }}>
+                            <div style={{ width: `${Math.min(Math.max(srv.percentage, 0), 100)}%`, height: '100%', background: 'linear-gradient(90deg, #7c3aed, #007AFF)', borderRadius: '10px' }}></div>
+                          </div>
+                        </div>
+                      )}
+                      
                       <button className="btn secondary" style={{ padding: '6px 14px', fontSize: '0.8rem', width: '100%' }}>
                         Click for Details &rarr;
                       </button>
@@ -691,6 +704,18 @@ export default function PortfolioClient({ data = {} }) {
             </div>
 
             <ImageSlider mainImage={selectedService.images && selectedService.images.length > 0 ? selectedService.images[0] : null} images={selectedService.images} title={selectedService.title} />
+
+            {selectedService.percentage != null && (
+              <div style={{ marginTop: '1.5rem', marginBottom: '1.5rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontSize: '0.95rem', fontWeight: '600', color: modalTextColor }}>
+                  <span>Knowledge Level</span>
+                  <span>{selectedService.percentage}%</span>
+                </div>
+                <div style={{ width: '100%', height: '8px', background: isLightTheme ? '#e2e8f0' : 'rgba(255,255,255,0.1)', borderRadius: '10px', overflow: 'hidden' }}>
+                  <div style={{ width: `${Math.min(Math.max(selectedService.percentage, 0), 100)}%`, height: '100%', background: 'linear-gradient(90deg, #7c3aed, #007AFF)', borderRadius: '10px' }}></div>
+                </div>
+              </div>
+            )}
 
             <div style={{ display: 'flex', gap: '10px', alignItems: 'center', marginBottom: '12px' }}>
               {selectedService.category && (
