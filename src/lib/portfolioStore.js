@@ -74,7 +74,7 @@ export async function getModuleItems(module) {
   try {
     switch (module) {
       case 'profile':
-        return (await prisma.profile.findFirst()) || getLocalData().profile;
+        return await prisma.profile.findFirst();
       case 'services':
         return await prisma.service.findMany({ orderBy: { id: 'asc' } });
       case 'projects':
@@ -96,11 +96,16 @@ export async function getModuleItems(module) {
       case 'social-links':
         return await prisma.socialLink.findMany({ orderBy: { id: 'asc' } });
       case 'site-settings':
-        return (await prisma.siteSetting.findFirst()) || getLocalData().siteSettings;
+        return await prisma.siteSetting.findFirst();
       default:
         return [];
     }
-  } catch {
+  } catch (err) {
+    console.error(`Database query error for ${module}:`, err.message);
+    const isServerless = process.env.VERCEL || process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.NODE_ENV === 'production';
+    if (isServerless) {
+      return module === 'profile' || module === 'site-settings' ? null : [];
+    }
     const local = getLocalData();
     if (module === 'profile') return local.profile;
     if (module === 'site-settings') return local.siteSettings;
