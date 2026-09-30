@@ -569,16 +569,25 @@ export default function PortfolioClient({ data = {} }) {
                 <h2>Skills &amp; Technologies</h2>
               </div>
               <div className="skills-container">
-                <div className="skill-group">
-                  <h3>Mastered Technologies</h3>
-                  <div className="skill-tags">
-                    {skills.map((sk) => (
-                      <span key={sk.id || sk.name}>
-                        {sk.name || sk.title} {sk.proficiency ? `(${sk.proficiency}%)` : ''}
-                      </span>
-                    ))}
+                {Object.entries(
+                  skills.reduce((acc, sk) => {
+                    const category = sk.category || 'Other';
+                    if (!acc[category]) acc[category] = [];
+                    acc[category].push(sk);
+                    return acc;
+                  }, {})
+                ).map(([category, categorySkills]) => (
+                  <div key={category} className="skill-group">
+                    <h3>{category}</h3>
+                    <div className="skill-tags">
+                      {categorySkills.map((sk) => (
+                        <span key={sk.id || sk.name} style={{ display: 'inline-block', margin: '5px', padding: '8px 12px', background: '#6366f1', color: '#fff', borderRadius: '20px', fontSize: '14px', fontWeight: '500' }}>
+                          {sk.name || sk.title} {sk.proficiency ? `(${sk.proficiency}%)` : ''}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
           </section>
