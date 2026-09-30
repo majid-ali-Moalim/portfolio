@@ -57,11 +57,14 @@ export default function AdminDashboard() {
     setTimeout(() => setToast({ visible: false, message: '', type: 'success' }), 3000);
   };
 
-  // Fetch All Modules Data
+  // Fetch All Modules Data — always bypass cache so newly saved items appear immediately
   const fetchModuleData = async (module) => {
     try {
       setLoading(true);
-      const res = await fetch(`/api/admin/portfolio/${module}`);
+      const res = await fetch(`/api/admin/portfolio/${module}?t=${Date.now()}`, {
+        cache: 'no-store',
+        headers: { 'Cache-Control': 'no-cache' },
+      });
       if (!res.ok) return;
       const data = await res.json();
       
@@ -228,8 +231,32 @@ export default function AdminDashboard() {
         } catch {}
         throw new Error(errMsg);
       }
-      showToast(`Item ${editingId ? 'updated' : 'created'} successfully!`);
+
+      // Get the saved item back from the API and immediately update state
+      const savedItem = await res.json();
+
+      // Optimistic update: add/replace in the right state list immediately
+      const updateList = (setter) => setter(prev =>
+        editingId
+          ? prev.map(i => i.id === savedItem.id ? savedItem : i)
+          : [savedItem, ...prev]
+      );
+
+      switch (activeTab) {
+        case 'services': updateList(setServices); break;
+        case 'projects': updateList(setProjects); break;
+        case 'achievements': updateList(setAchievements); break;
+        case 'certifications': updateList(setCertifications); break;
+        case 'posts': updateList(setPosts); break;
+        case 'skills': updateList(setSkills); break;
+        case 'experiences': updateList(setExperiences); break;
+        case 'educations': updateList(setEducations); break;
+        case 'social-links': updateList(setSocialLinks); break;
+      }
+
+      showToast(`${activeTab === 'posts' ? 'Blog post' : 'Item'} ${editingId ? 'updated' : 'saved'} successfully!`);
       setIsModalOpen(false);
+      // Re-fetch in background to confirm DB sync
       fetchModuleData(activeTab);
       router.refresh();
     } catch (err) {
