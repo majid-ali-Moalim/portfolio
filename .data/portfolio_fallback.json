@@ -362,6 +362,26 @@
   ],
   "posts": [
     {
+      "id": 5,
+      "createdAt": "2026-09-30T19:09:01.251Z",
+      "title": "Hello World Blog",
+      "slug": "hello-world-blog",
+      "postType": "BLOG",
+      "category": "Software Engineering",
+      "author": "Abdimajid Ali Moalim",
+      "tags": [
+        "hello",
+        "world"
+      ],
+      "snippet": "My first blog post.",
+      "content": "This is my first blog post content.",
+      "status": "Published",
+      "published": true,
+      "featured": false,
+      "readingTime": "1 min read",
+      "date": "2026-09-30"
+    },
+    {
       "id": 4,
       "createdAt": "2026-09-30T18:47:46.806Z",
       "title": "kk",
