@@ -285,14 +285,11 @@ export default function PortfolioClient({ data = {} }) {
             {projects.length > 0 && <li><a href="#projects">Projects</a></li>}
             {achievements.length > 0 && <li><a href="#achievements">Achievements</a></li>}
             {certifications.length > 0 && <li><a href="#certifications">Certifications</a></li>}
-            {posts.length > 0 && <li><a href="#blog">Blog</a></li>}
+            <li><a href="#blog">Blog</a></li>
             {skills.length > 0 && <li><a href="#skills">Skills</a></li>}
             <li><a href="#contact">Contact</a></li>
           </ul>
           <div className="nav-controls">
-            <a href="/admin/login" className="nav-admin-btn" title="Admin Portal">
-              <i className="fas fa-user-shield"></i> <span>Login</span>
-            </a>
             <button id="theme-toggle" aria-label="Toggle Dark/Light Mode">
               <i className="fas fa-moon"></i>
             </button>
