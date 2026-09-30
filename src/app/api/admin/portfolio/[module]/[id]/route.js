@@ -17,6 +17,7 @@ export async function PUT(request, { params }) {
 
   try {
     const updated = await saveModuleItem(module, body, id);
+    revalidatePath('/', 'layout');
     revalidatePath('/');
     return NextResponse.json(updated);
   } catch (error) {
@@ -32,6 +33,7 @@ export async function DELETE(request, { params }) {
 
   try {
     await deleteModuleItem(module, id);
+    revalidatePath('/', 'layout');
     revalidatePath('/');
     return NextResponse.json({ success: true });
   } catch (error) {
