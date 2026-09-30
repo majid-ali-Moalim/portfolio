@@ -286,7 +286,7 @@ export default function PortfolioClient({ data = {} }) {
             {services.length > 0 && <li><a href="#services">Services</a></li>}
             {projects.length > 0 && <li><a href="#projects">Projects</a></li>}
             {achievements.length > 0 && <li><a href="#achievements">Achievements</a></li>}
-            {certifications.length > 0 && <li><a href="#certifications">Certifications</a></li>}
+            {certifications.length > 0 && <li><a href=\"#certifications\">Certifications</a></li>}\n            {educations.length > 0 && <li><a href=\"#education\">Education</a></li>}
             <li><a href="#blog">Blog</a></li>
             {skills.length > 0 && <li><a href="#skills">Skills</a></li>}
             <li><a href="#contact">Contact</a></li>
