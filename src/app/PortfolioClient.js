@@ -160,6 +160,7 @@ export default function PortfolioClient({ data = {} }) {
   const projects = data.projects || [];
   const achievements = data.achievements || [];
   const certifications = data.certifications || [];
+            {educations.length > 0 && <li><a href="#education">Education</a></li>}
   const posts = data.posts || [];
   const skills = data.skills || [];
   const experiences = data.experiences || [];
@@ -173,6 +174,7 @@ export default function PortfolioClient({ data = {} }) {
   };
 
   // State for Modals (Services, Projects, Achievements, Certifications)
+            {educations.length > 0 && <li><a href="#education">Education</a></li>}
   const [selectedService, setSelectedService] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedAch, setSelectedAch] = useState(null);
@@ -287,6 +289,7 @@ export default function PortfolioClient({ data = {} }) {
             {projects.length > 0 && <li><a href="#projects">Projects</a></li>}
             {achievements.length > 0 && <li><a href="#achievements">Achievements</a></li>}
             {certifications.length > 0 && <li><a href="#certifications">Certifications</a></li>}
+            {educations.length > 0 && <li><a href="#education">Education</a></li>}
             <li><a href="#blog">Blog</a></li>
             {skills.length > 0 && <li><a href="#skills">Skills</a></li>}
             <li><a href="#contact">Contact</a></li>
@@ -496,15 +499,20 @@ export default function PortfolioClient({ data = {} }) {
         )}
 
         {/* ===================== CERTIFICATIONS (CARD SHOWS IMAGE, TITLE, DATE ONLY) ===================== */}
+            {educations.length > 0 && <li><a href="#education">Education</a></li>}
         {certifications.length > 0 && (
+            {educations.length > 0 && <li><a href="#education">Education</a></li>}
           <section id="certifications" className="projects section">
+            {educations.length > 0 && <li><a href="#education">Education</a></li>}
             <div className="container">
               <div className="section-header">
                 <span className="tag">Credentials</span>
                 <h2>Certifications</h2>
+            {educations.length > 0 && <li><a href="#education">Education</a></li>}
               </div>
               <div className="projects-grid">
                 {certifications.map((cert) => {
+            {educations.length > 0 && <li><a href="#education">Education</a></li>}
                   const cardImg = cert.imageUrl || (cert.images && cert.images.length > 0 ? cert.images[0] : null);
                   return (
                     <div
@@ -717,6 +725,7 @@ export default function PortfolioClient({ data = {} }) {
                 {projects.length > 0 && <li><a href="#projects">Projects</a></li>}
                 {achievements.length > 0 && <li><a href="#achievements">Achievements</a></li>}
                 {certifications.length > 0 && <li><a href="#certifications">Certifications</a></li>}
+            {educations.length > 0 && <li><a href="#education">Education</a></li>}
                 {educations.length > 0 && <li><a href="#education">Education</a></li>}
                 {posts.length > 0 && <li><a href="#blog">Blog</a></li>}
                 <li><a href="#contact">Contact</a></li>
