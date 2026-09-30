@@ -25,6 +25,8 @@ export default function AdminDashboard() {
     yearsExperience: '4+',
     projectsCompleted: '15+',
     happyClients: '20+',
+    avatarUrl: '',
+    cvUrl: '',
   });
 
   const [services, setServices] = useState([]);
@@ -303,6 +305,26 @@ export default function AdminDashboard() {
           {activeTab === 'profile' && (
             <div style={styles.card}>
               <h3 style={styles.cardTitle}>Edit Personal Profile</h3>
+
+              {/* Live Avatar Preview */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '24px', padding: '16px', borderRadius: '14px', background: isDark ? '#1c1c1f' : '#f8fafc', border: `1px solid ${isDark ? '#3f3f46' : '#e2e8f0'}` }}>
+                <div style={{ position: 'relative', flexShrink: 0 }}>
+                  <img
+                    src={profile.avatarUrl || '/images/myimage.png'}
+                    alt="Avatar Preview"
+                    style={{ width: '90px', height: '90px', borderRadius: '50%', objectFit: 'cover', border: '3px solid #7c3aed', boxShadow: '0 0 20px rgba(124,58,237,0.4)' }}
+                  />
+                  <span style={{ position: 'absolute', bottom: 0, right: 0, background: '#7c3aed', color: '#fff', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem' }}>
+                    <i className="fas fa-camera"></i>
+                  </span>
+                </div>
+                <div>
+                  <div style={{ fontWeight: 700, fontSize: '1.1rem', color: isDark ? '#f4f4f5' : '#0f172a' }}>{profile.name}</div>
+                  <div style={{ fontSize: '0.85rem', color: isDark ? '#a1a1aa' : '#64748b', marginTop: '4px' }}>{profile.title?.split(/[,|&]/)[0]?.trim()}</div>
+                  <div style={{ fontSize: '0.78rem', color: '#7c3aed', marginTop: '4px' }}>{profile.email}</div>
+                </div>
+              </div>
+
               <form onSubmit={(e) => { e.preventDefault(); handleSaveSingleModule('profile', profile); }}>
                 <div style={styles.formGrid}>
                   <FormField label="Full Name" value={profile.name} onChange={(v) => setProfile({ ...profile, name: v })} isDark={isDark} />
