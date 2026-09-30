@@ -131,6 +131,22 @@
   ],
   "projects": [
     {
+      "id": 3,
+      "createdAt": "2026-09-30T13:10:33.317Z",
+      "title": "kk",
+      "description": "hhh",
+      "bullets": [
+        "hh"
+      ],
+      "techStack": [],
+      "imageUrl": "https://cydnoncvkhzhopcwekoi.supabase.co/storage/v1/object/public/uploads/1790773813304_4-22-2026.jpeg",
+      "githubUrl": "hhh",
+      "liveUrl": "jjj",
+      "category": "Full Stack",
+      "featured": true,
+      "additionalInfo": "hhhhh"
+    },
+    {
       "id": 2,
       "createdAt": "2026-09-29T19:03:09.388Z",
       "title": "Aamin Ambulance Dispatch System (AADS)",
