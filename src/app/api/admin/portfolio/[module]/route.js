@@ -45,6 +45,7 @@ export async function POST(request, { params }) {
 
   try {
     const saved = await saveModuleItem(module, body);
+    revalidatePath('/', 'layout');
     revalidatePath('/');
     return NextResponse.json(saved, { status: 201 });
   } catch (error) {

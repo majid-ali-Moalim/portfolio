@@ -112,6 +112,7 @@ export async function getModuleItems(module) {
 export async function saveModuleItem(module, body, id = null) {
   let dbSuccess = false;
   let resultItem = null;
+  let prismaError = null;
 
   try {
     if (module === 'profile') {
@@ -150,10 +151,16 @@ export async function saveModuleItem(module, body, id = null) {
       dbSuccess = true;
     }
   } catch (err) {
-    console.warn(`Prisma save notice for ${module}: using local persistent store (${err.message})`);
+    prismaError = err;
+    console.error(`Prisma save failed for ${module}:`, err.message);
   }
 
   if (!dbSuccess) {
+    const isServerless = process.env.VERCEL || process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.NODE_ENV === 'production';
+    if (isServerless) {
+      throw new Error(`Database save failed (${prismaError?.message || 'Database disconnected'}). On serverless deployments, you must configure DATABASE_URL in your hosting environment variables.`);
+    }
+
     const local = getLocalData();
     if (module === 'profile') {
       local.profile = { ...local.profile, ...body };
@@ -187,6 +194,9 @@ export async function saveModuleItem(module, body, id = null) {
 // Unified Delete Module Item
 export async function deleteModuleItem(module, id) {
   const numId = parseInt(id);
+  let dbSuccess = false;
+  let prismaError = null;
+
   try {
     switch (module) {
       case 'services': await prisma.service.delete({ where: { id: numId } }); break;
@@ -200,7 +210,18 @@ export async function deleteModuleItem(module, id) {
       case 'messages': await prisma.message.delete({ where: { id: numId } }); break;
       case 'social-links': await prisma.socialLink.delete({ where: { id: numId } }); break;
     }
-  } catch {
+    dbSuccess = true;
+  } catch (err) {
+    prismaError = err;
+    console.error(`Prisma delete failed for ${module}:`, err.message);
+  }
+
+  if (!dbSuccess) {
+    const isServerless = process.env.VERCEL || process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.NODE_ENV === 'production';
+    if (isServerless) {
+      throw new Error(`Database delete failed (${prismaError?.message || 'Database disconnected'}). On serverless deployments, you must configure DATABASE_URL in your hosting environment variables.`);
+    }
+
     const local = getLocalData();
     const key = module === 'social-links' ? 'socialLinks' : module;
     if (Array.isArray(local[key])) {
