@@ -162,6 +162,8 @@ export default function PortfolioClient({ data = {} }) {
   const certifications = data.certifications || [];
   const posts = data.posts || [];
   const skills = data.skills || [];
+  const experiences = data.experiences || [];
+  const educations = data.educations || [];
   const socialLinks = data.socialLinks || [];
   const siteSettings = data.siteSettings || {
     siteTitle: 'Abdimajid Ali Moalim | Portfolio',
@@ -534,6 +536,45 @@ export default function PortfolioClient({ data = {} }) {
           </section>
         )}
 
+        {/* ===================== EDUCATION ===================== */}
+        {educations.length > 0 && (
+          <section id="education" className="education section">
+            <div className="container">
+              <div className="section-header">
+                <span className="tag">Learning &amp; Credentials</span>
+                <h2>Education</h2>
+              </div>
+              <div style={{ display: 'grid', gap: '24px' }}>
+                {educations.map((edu) => (
+                  <div key={edu.id} style={{
+                    padding: '20px',
+                    border: '1px solid rgba(124, 58, 237, 0.2)',
+                    borderRadius: '12px',
+                    background: 'rgba(124, 58, 237, 0.05)',
+                    backdropFilter: 'blur(10px)'
+                  }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '12px' }}>
+                      <div>
+                        <h3 style={{ margin: '0 0 4px 0', fontSize: '1.2rem', fontWeight: 600 }}>{edu.degree}</h3>
+                        <p style={{ margin: '0', fontSize: '0.95rem', opacity: 0.8, fontWeight: 500 }}>{edu.institution}</p>
+                      </div>
+                      <span style={{ fontSize: '0.8rem', opacity: 0.6, whiteSpace: 'nowrap', marginLeft: '16px' }}>
+                        {edu.startDate} {edu.endDate ? `- ${edu.endDate}` : ''}
+                      </span>
+                    </div>
+                    {edu.fieldOfStudy && (
+                      <p style={{ margin: '8px 0', fontSize: '0.9rem', opacity: 0.75 }}><strong>Field:</strong> {edu.fieldOfStudy}</p>
+                    )}
+                    {edu.description && (
+                      <p style={{ margin: '8px 0 0 0', fontSize: '0.9rem', lineHeight: '1.5' }}>{edu.description}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* ===================== BLOG SECTION ===================== */}
         {posts.length > 0 && (
           <section id="blog" className="projects section">
@@ -676,6 +717,7 @@ export default function PortfolioClient({ data = {} }) {
                 {projects.length > 0 && <li><a href="#projects">Projects</a></li>}
                 {achievements.length > 0 && <li><a href="#achievements">Achievements</a></li>}
                 {certifications.length > 0 && <li><a href="#certifications">Certifications</a></li>}
+                {educations.length > 0 && <li><a href="#education">Education</a></li>}
                 {posts.length > 0 && <li><a href="#blog">Blog</a></li>}
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="/admin/login" style={{ color: '#a78bfa', fontWeight: 600 }}><i className="fas fa-lock" style={{ marginRight: '6px' }}></i>Admin Login</a></li>
