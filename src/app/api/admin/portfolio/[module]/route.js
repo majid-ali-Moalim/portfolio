@@ -45,9 +45,15 @@ export async function POST(request, { params }) {
 
   try {
     const saved = await saveModuleItem(module, body);
+    // Comprehensive cache invalidation
     revalidatePath('/', 'layout');
     revalidatePath('/');
-    return NextResponse.json(saved, { status: 201 });
+    revalidatePath('/admin', 'layout');
+    revalidatePath('/admin');
+    const response = NextResponse.json(saved, { status: 201 });
+    // Prevent caching of this response
+    response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+    return response;
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }

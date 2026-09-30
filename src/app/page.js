@@ -4,6 +4,9 @@ import PortfolioClient from './PortfolioClient';
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
+// Prevent all caching for this page
+export const fetchCache = 'force-no-store';
+
 export default async function Home() {
   let portfolioData = {
     profile: null,

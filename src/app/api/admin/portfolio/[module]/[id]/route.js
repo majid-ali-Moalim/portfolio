@@ -17,9 +17,15 @@ export async function PUT(request, { params }) {
 
   try {
     const updated = await saveModuleItem(module, body, id);
+    // Comprehensive cache invalidation
     revalidatePath('/', 'layout');
     revalidatePath('/');
-    return NextResponse.json(updated);
+    revalidatePath('/admin', 'layout');
+    revalidatePath('/admin');
+    const response = NextResponse.json(updated);
+    // Prevent caching of this response
+    response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+    return response;
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
@@ -33,9 +39,15 @@ export async function DELETE(request, { params }) {
 
   try {
     await deleteModuleItem(module, id);
+    // Comprehensive cache invalidation
     revalidatePath('/', 'layout');
     revalidatePath('/');
-    return NextResponse.json({ success: true });
+    revalidatePath('/admin', 'layout');
+    revalidatePath('/admin');
+    const response = NextResponse.json({ success: true });
+    // Prevent caching of this response
+    response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+    return response;
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
