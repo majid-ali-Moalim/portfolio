@@ -189,14 +189,24 @@ export const PostScalarFieldEnum = {
   id: 'id',
   title: 'title',
   slug: 'slug',
+  postType: 'postType',
+  category: 'category',
+  author: 'author',
+  tags: 'tags',
+  imageUrl: 'imageUrl',
+  images: 'images',
   snippet: 'snippet',
   content: 'content',
-  tags: 'tags',
+  status: 'status',
   published: 'published',
+  featured: 'featured',
+  readingTime: 'readingTime',
   date: 'date',
+  seoTitle: 'seoTitle',
+  seoDescription: 'seoDescription',
   additionalInfo: 'additionalInfo',
-  images: 'images',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]

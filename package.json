@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma db push && node prisma/seed.js && prisma generate && next build",
+    "build": "prisma db push && npx tsx prisma/seed.js && prisma generate && next build",
     "start": "next start",
     "lint": "eslint",
-    "db:seed": "node prisma/seed.js"
+    "db:seed": "npx tsx prisma/seed.js"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.10.0",

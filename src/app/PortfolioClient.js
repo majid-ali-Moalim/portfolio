@@ -160,7 +160,6 @@ export default function PortfolioClient({ data = {} }) {
   const projects = data.projects || [];
   const achievements = data.achievements || [];
   const certifications = data.certifications || [];
-            {educations.length > 0 && <li><a href="#education">Education</a></li>}
   const posts = data.posts || [];
   const skills = data.skills || [];
   const experiences = data.experiences || [];
@@ -173,12 +172,12 @@ export default function PortfolioClient({ data = {} }) {
     footerText: '© 2026 Abdimajid Ali Moalim. All rights reserved.',
   };
 
-  // State for Modals (Services, Projects, Achievements, Certifications)
-            {educations.length > 0 && <li><a href="#education">Education</a></li>}
+  // State for Modals (Services, Projects, Achievements, Certifications, Posts)
   const [selectedService, setSelectedService] = useState(null);
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedAch, setSelectedAch] = useState(null);
   const [selectedCert, setSelectedCert] = useState(null);
+  const [selectedPost, setSelectedPost] = useState(null);
 
   // Theme Detection for Modal Styling
   const [isLightTheme, setIsLightTheme] = useState(false);
@@ -499,20 +498,15 @@ export default function PortfolioClient({ data = {} }) {
         )}
 
         {/* ===================== CERTIFICATIONS (CARD SHOWS IMAGE, TITLE, DATE ONLY) ===================== */}
-            {educations.length > 0 && <li><a href="#education">Education</a></li>}
         {certifications.length > 0 && (
-            {educations.length > 0 && <li><a href="#education">Education</a></li>}
           <section id="certifications" className="projects section">
-            {educations.length > 0 && <li><a href="#education">Education</a></li>}
             <div className="container">
               <div className="section-header">
                 <span className="tag">Credentials</span>
                 <h2>Certifications</h2>
-            {educations.length > 0 && <li><a href="#education">Education</a></li>}
               </div>
               <div className="projects-grid">
                 {certifications.map((cert) => {
-            {educations.length > 0 && <li><a href="#education">Education</a></li>}
                   const cardImg = cert.imageUrl || (cert.images && cert.images.length > 0 ? cert.images[0] : null);
                   return (
                     <div
@@ -584,26 +578,75 @@ export default function PortfolioClient({ data = {} }) {
         )}
 
         {/* ===================== BLOG SECTION ===================== */}
-        {posts.length > 0 && (
+        {posts.filter(p => p.published !== false && p.status !== 'Draft').length > 0 && (
           <section id="blog" className="projects section">
             <div className="container">
               <div className="section-header">
-                <span className="tag">Articles &amp; News</span>
-                <h2>Blog &amp; Insights</h2>
+                <span className="tag">Articles &amp; Insights</span>
+                <h2>Blog &amp; Opinions</h2>
               </div>
               <div className="projects-grid">
-                {posts.map((post) => (
-                  <div key={post.id} className="project-card">
-                    <div className="project-info">
-                      <div style={{ fontSize: '0.8rem', opacity: 0.7, marginBottom: '8px' }}>
-                        <i className="far fa-calendar-alt" style={{ marginRight: '6px' }}></i>
-                        {formatCardDate(post.date, post.createdAt)}
+                {posts.filter(p => p.published !== false && p.status !== 'Draft').map((post) => {
+                  const cardImg = post.imageUrl || (post.images && post.images.length > 0 ? post.images[0] : null);
+                  return (
+                    <div
+                      key={post.id}
+                      className="project-card"
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => setSelectedPost(post)}
+                    >
+                      {cardImg && (
+                        <div className="project-img">
+                          <img src={cardImg} alt={post.title} />
+                        </div>
+                      )}
+                      <div className="project-info">
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.8rem', opacity: 0.8, marginBottom: '10px' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            <span style={{ background: '#7c3aed', color: '#fff', fontSize: '0.7rem', padding: '2px 8px', borderRadius: '10px', fontWeight: 600 }}>
+                              {post.postType || 'BLOG'}
+                            </span>
+                            {post.category && (
+                              <span style={{ fontSize: '0.75rem', opacity: 0.85, fontWeight: 500 }}>
+                                {post.category}
+                              </span>
+                            )}
+                          </div>
+                          {post.readingTime && (
+                            <span style={{ fontSize: '0.75rem', opacity: 0.7 }}>
+                              <i className="far fa-clock" style={{ marginRight: '4px' }}></i>
+                              {post.readingTime}
+                            </span>
+                          )}
+                        </div>
+                        <h3 style={{ margin: '8px 0', fontSize: '1.25rem' }}>{post.title}</h3>
+                        <div style={{ fontSize: '0.8rem', opacity: 0.7, marginBottom: '10px' }}>
+                          <i className="far fa-calendar-alt" style={{ marginRight: '6px' }}></i>
+                          {formatCardDate(post.date, post.createdAt)}
+                          {post.author && (
+                            <span style={{ marginLeft: '10px' }}>
+                              <i className="far fa-user" style={{ marginRight: '4px' }}></i>
+                              {post.author}
+                            </span>
+                          )}
+                        </div>
+                        <p style={{ fontSize: '0.9rem', lineHeight: '1.5', opacity: 0.85 }}>
+                          {post.snippet || (post.content ? (post.content.length > 140 ? post.content.substring(0, 140) + '...' : post.content) : '')}
+                        </p>
+                        {post.tags && post.tags.length > 0 && (
+                          <div className="tech-stack" style={{ marginTop: '12px', marginBottom: '12px' }}>
+                            {post.tags.slice(0, 4).map((t, idx) => (
+                              <span key={idx} style={{ fontSize: '0.75rem', padding: '3px 8px' }}>{t}</span>
+                            ))}
+                          </div>
+                        )}
+                        <button className="btn secondary" style={{ padding: '6px 14px', fontSize: '0.8rem', width: '100%', marginTop: '6px' }}>
+                          Read Article &rarr;
+                        </button>
                       </div>
-                      <h3>{post.title}</h3>
-                      <p>{post.snippet || post.content.substring(0, 120) + '...'}</p>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </section>
@@ -725,7 +768,6 @@ export default function PortfolioClient({ data = {} }) {
                 {projects.length > 0 && <li><a href="#projects">Projects</a></li>}
                 {achievements.length > 0 && <li><a href="#achievements">Achievements</a></li>}
                 {certifications.length > 0 && <li><a href="#certifications">Certifications</a></li>}
-            {educations.length > 0 && <li><a href="#education">Education</a></li>}
                 {educations.length > 0 && <li><a href="#education">Education</a></li>}
                 {posts.length > 0 && <li><a href="#blog">Blog</a></li>}
                 <li><a href="#contact">Contact</a></li>
@@ -946,6 +988,89 @@ export default function PortfolioClient({ data = {} }) {
                 <a href={selectedCert.credentialUrl} target="_blank" rel="noreferrer" className="btn primary" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
                   <i className="fas fa-external-link-alt"></i> Verify Credential Online
                 </a>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* ===================== POST / BLOG ARTICLE DETAIL MODAL ===================== */}
+      {selectedPost && (
+        <div style={modalOverlayStyle} onClick={() => setSelectedPost(null)}>
+          <div style={{ ...modalBoxStyle, maxWidth: '780px', background: modalBg, color: modalTextColor, borderColor: modalBorderColor }} onClick={(e) => e.stopPropagation()}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '15px' }}>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', flexWrap: 'wrap' }}>
+                  <span style={{ background: '#7c3aed', color: '#fff', fontSize: '0.75rem', padding: '3px 10px', borderRadius: '12px', fontWeight: 600 }}>
+                    {selectedPost.postType || 'BLOG'}
+                  </span>
+                  {selectedPost.category && (
+                    <span style={{ background: isLightTheme ? '#e2e8f0' : 'rgba(255,255,255,0.1)', color: modalTextColor, fontSize: '0.75rem', padding: '3px 10px', borderRadius: '12px', fontWeight: 600 }}>
+                      {selectedPost.category}
+                    </span>
+                  )}
+                  {selectedPost.featured && (
+                    <span style={{ background: '#fef3c7', color: '#b45309', fontSize: '0.75rem', padding: '3px 10px', borderRadius: '12px', fontWeight: 700 }}>
+                      ⭐ Featured Post
+                    </span>
+                  )}
+                </div>
+                <h3 style={{ margin: 0, fontSize: '1.5rem', lineHeight: '1.3', color: modalTextColor }}>{selectedPost.title}</h3>
+              </div>
+              <button style={{ ...closeBtnStyle, color: modalSubTextColor }} onClick={() => setSelectedPost(null)}>&times;</button>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', fontSize: '0.85rem', color: modalSubTextColor, marginBottom: '16px', flexWrap: 'wrap' }}>
+              {selectedPost.author && (
+                <span><i className="far fa-user" style={{ marginRight: '6px' }}></i>By {selectedPost.author}</span>
+              )}
+              <span><i className="far fa-calendar-alt" style={{ marginRight: '6px' }}></i>{formatCardDate(selectedPost.date, selectedPost.createdAt)}</span>
+              {selectedPost.readingTime && (
+                <span><i className="far fa-clock" style={{ marginRight: '6px' }}></i>{selectedPost.readingTime}</span>
+              )}
+            </div>
+
+            <ImageSlider mainImage={selectedPost.imageUrl} images={selectedPost.images} title={selectedPost.title} />
+
+            {selectedPost.snippet && (
+              <div style={{
+                fontStyle: 'italic',
+                fontSize: '1.05rem',
+                lineHeight: 1.6,
+                padding: '12px 16px',
+                borderLeft: '4px solid #7c3aed',
+                background: isLightTheme ? '#f8fafc' : 'rgba(124, 58, 237, 0.08)',
+                borderRadius: '0 8px 8px 0',
+                margin: '16px 0',
+                color: modalTextColor,
+              }}>
+                {selectedPost.snippet}
+              </div>
+            )}
+
+            {selectedPost.content && (
+              <div style={{
+                lineHeight: 1.8,
+                fontSize: '0.98rem',
+                margin: '20px 0',
+                whiteSpace: 'pre-line',
+                color: modalTextColor,
+              }}>
+                {selectedPost.content}
+              </div>
+            )}
+
+            {selectedPost.tags && selectedPost.tags.length > 0 && (
+              <div className="tech-stack" style={{ marginTop: '20px' }}>
+                {selectedPost.tags.map((t, idx) => (
+                  <span key={idx}>{t}</span>
+                ))}
+              </div>
+            )}
+
+            {selectedPost.additionalInfo && (
+              <div style={{ marginTop: '16px', padding: '12px', borderRadius: '8px', background: isLightTheme ? '#f1f5f9' : 'rgba(255,255,255,0.05)', fontSize: '0.85rem' }}>
+                <strong>Notes / Context:</strong> {selectedPost.additionalInfo}
               </div>
             )}
           </div>

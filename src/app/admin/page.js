@@ -119,7 +119,14 @@ export default function AdminDashboard() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(dataToSave),
       });
-      if (!res.ok) throw new Error('Save failed');
+      if (!res.ok) {
+        let errMsg = 'Save failed';
+        try {
+          const errData = await res.json();
+          errMsg = errData?.error || errData?.message || errMsg;
+        } catch {}
+        throw new Error(errMsg);
+      }
       showToast(`${module.replace('-', ' ')} updated successfully!`);
       fetchModuleData(module);
       router.refresh();
@@ -140,6 +147,14 @@ export default function AdminDashboard() {
       if (Array.isArray(copy.bullets)) copy.bullets = copy.bullets.join('\n');
       if (Array.isArray(copy.tags)) copy.tags = copy.tags.join(', ');
       if (Array.isArray(copy.techStack)) copy.techStack = copy.techStack.join(', ');
+      if (activeTab === 'posts') {
+        if (!copy.postType) copy.postType = 'BLOG';
+        if (!copy.category) copy.category = 'Software Engineering';
+        if (!copy.status) copy.status = copy.published === false ? 'Draft' : 'Published';
+        if (!copy.author) copy.author = profile?.name || 'Abdimajid Ali Moalim';
+        if (copy.featured === undefined || copy.featured === null) copy.featured = false;
+        if (!copy.readingTime) copy.readingTime = '3 min read';
+      }
       setModalData(copy);
     } else {
       switch (activeTab) {
@@ -147,7 +162,26 @@ export default function AdminDashboard() {
         case 'projects': setModalData({ title: '', description: '', bullets: '', techStack: '', imageUrl: '', githubUrl: '', liveUrl: '', category: 'Full Stack', featured: true }); break;
         case 'achievements': setModalData({ title: '', description: '', bullets: '', tags: '', imageUrl: '', category: 'General', date: '' }); break;
         case 'certifications': setModalData({ title: '', issuer: '', issueDate: '', description: '', imageUrl: '', tags: '', credentialId: '', credentialUrl: '' }); break;
-        case 'posts': setModalData({ title: '', slug: '', snippet: '', content: '', tags: '', published: true }); break;
+        case 'posts': setModalData({
+          title: '',
+          slug: '',
+          postType: 'BLOG',
+          category: 'Software Engineering',
+          author: profile?.name || 'Abdimajid Ali Moalim',
+          tags: '',
+          imageUrl: '',
+          images: [],
+          snippet: '',
+          content: '',
+          status: 'Published',
+          published: true,
+          featured: false,
+          date: new Date().toISOString().split('T')[0],
+          readingTime: '3 min read',
+          seoTitle: '',
+          seoDescription: '',
+          additionalInfo: '',
+        }); break;
         case 'skills': setModalData({ name: '', category: 'Development', proficiency: 90, icon: 'fas fa-check' }); break;
         case 'experiences': setModalData({ company: '', role: '', location: '', startDate: '', endDate: 'Present', description: '', bullets: '' }); break;
         case 'educations': setModalData({ institution: '', degree: '', fieldOfStudy: '', startDate: '', endDate: '', description: '' }); break;
@@ -166,6 +200,14 @@ export default function AdminDashboard() {
       if (typeof payload.bullets === 'string') payload.bullets = payload.bullets.split('\n').map(b => b.trim()).filter(Boolean);
       if (typeof payload.tags === 'string') payload.tags = payload.tags.split(',').map(t => t.trim()).filter(Boolean);
       if (typeof payload.techStack === 'string') payload.techStack = payload.techStack.split(',').map(t => t.trim()).filter(Boolean);
+      if (activeTab === 'posts') {
+        if (payload.status === 'Published') payload.published = true;
+        else if (payload.status === 'Draft' || payload.status === 'Archived') payload.published = false;
+        payload.featured = payload.featured === true || payload.featured === 'true' || payload.featured === 'Yes';
+        if (!payload.slug && payload.title) {
+          payload.slug = slugify(payload.title);
+        }
+      }
 
       const url = editingId 
         ? `/api/admin/portfolio/${activeTab}/${editingId}` 
@@ -178,7 +220,14 @@ export default function AdminDashboard() {
         body: JSON.stringify(payload),
       });
 
-      if (!res.ok) throw new Error('Action failed');
+      if (!res.ok) {
+        let errMsg = 'Action failed';
+        try {
+          const errData = await res.json();
+          errMsg = errData?.error || errData?.message || errMsg;
+        } catch {}
+        throw new Error(errMsg);
+      }
       showToast(`Item ${editingId ? 'updated' : 'created'} successfully!`);
       setIsModalOpen(false);
       fetchModuleData(activeTab);
@@ -401,7 +450,7 @@ export default function AdminDashboard() {
       {/* ITEM FORM MODAL */}
       {isModalOpen && (
         <div style={styles.modalOverlay}>
-          <div style={styles.modalContent}>
+          <div style={{ ...styles.modalContent, maxWidth: activeTab === 'posts' ? '760px' : '600px' }}>
             <div style={styles.modalHeader}>
               <h3>{editingId ? 'Edit Item' : 'Add New Item'} ({activeTab})</h3>
               <button style={styles.closeBtn} onClick={() => setIsModalOpen(false)}>&times;</button>
@@ -486,13 +535,200 @@ export default function AdminDashboard() {
 
               {activeTab === 'posts' && (
                 <>
-                  <FormField label="Post Title (Optional)" value={modalData.title || ''} onChange={(v) => setModalData({ ...modalData, title: v })} isDark={isDark} />
-                  <FormField label="Slug (e.g. my-first-post)" value={modalData.slug || ''} onChange={(v) => setModalData({ ...modalData, slug: v })} isDark={isDark} />
-                  <FormField label="Posted Date / Date (Optional)" type="date" value={modalData.date || ''} onChange={(v) => setModalData({ ...modalData, date: v })} isDark={isDark} />
-                  <FormField label="Tags (Comma-separated)" value={modalData.tags || ''} onChange={(v) => setModalData({ ...modalData, tags: v })} isDark={isDark} />
-                  <FormTextarea label="Snippet / Excerpt (Optional)" value={modalData.snippet || ''} onChange={(v) => setModalData({ ...modalData, snippet: v })} isDark={isDark} />
-                  <FormTextarea label="Content / Body (Optional)" value={modalData.content || ''} onChange={(v) => setModalData({ ...modalData, content: v })} isDark={isDark} />
-                  <FormTextarea label="Additional Information / Notes (Optional)" value={modalData.additionalInfo || ''} onChange={(v) => setModalData({ ...modalData, additionalInfo: v })} isDark={isDark} />
+                  {/* BASIC INFORMATION */}
+                  <FormSectionHeader title="Basic Information" icon="fas fa-info-circle" isDark={isDark} />
+                  
+                  <FormField
+                    label="Post Title *"
+                    value={modalData.title || ''}
+                    onChange={(v) => {
+                      const updates = { title: v };
+                      if (!modalData.slug || modalData.slug === slugify(modalData.title || '')) {
+                        updates.slug = slugify(v);
+                      }
+                      setModalData({ ...modalData, ...updates });
+                    }}
+                    isDark={isDark}
+                  />
+
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '14px' }}>
+                    <div>
+                      <FormField
+                        label="Slug (e.g. why-people-fear-ai) *"
+                        value={modalData.slug || ''}
+                        onChange={(v) => setModalData({ ...modalData, slug: slugify(v) })}
+                        isDark={isDark}
+                      />
+                    </div>
+                    <div>
+                      <FormSelect
+                        label="Post Type"
+                        value={modalData.postType || 'BLOG'}
+                        onChange={(v) => setModalData({ ...modalData, postType: v })}
+                        options={[
+                          { value: 'BLOG', label: 'BLOG - Standard Blog Post' },
+                          { value: 'OPINION', label: 'OPINION - Thought Leadership / Op-Ed' },
+                          { value: 'ARTICLE', label: 'ARTICLE - In-depth Technical Article' },
+                          { value: 'NEWS', label: 'NEWS - Industry News & Updates' },
+                          { value: 'TUTORIAL', label: 'TUTORIAL - Practical Guide / How-To' },
+                          { value: 'ANNOUNCEMENT', label: 'ANNOUNCEMENT - Official Update' },
+                        ]}
+                        isDark={isDark}
+                      />
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '14px' }}>
+                    <div>
+                      <FormSelect
+                        label="Category"
+                        value={modalData.category || 'Software Engineering'}
+                        onChange={(v) => setModalData({ ...modalData, category: v })}
+                        options={[
+                          'Artificial Intelligence',
+                          'Cybersecurity',
+                          'Data Analytics & AI',
+                          'Software Engineering',
+                          'Web Development',
+                          'Cloud & DevOps',
+                          'Career & Growth',
+                          'Technology Trends',
+                          'Other',
+                        ]}
+                        isDark={isDark}
+                      />
+                    </div>
+                    <div>
+                      <FormField
+                        label="Author (Person publishing article)"
+                        value={modalData.author || ''}
+                        onChange={(v) => setModalData({ ...modalData, author: v })}
+                        isDark={isDark}
+                      />
+                    </div>
+                  </div>
+
+                  <FormField
+                    label="Tags (Comma-separated, e.g. AI, Future of Work, Career)"
+                    value={modalData.tags || ''}
+                    onChange={(v) => setModalData({ ...modalData, tags: v })}
+                    isDark={isDark}
+                  />
+
+                  {/* CONTENT */}
+                  <FormSectionHeader title="Content & Media" icon="fas fa-file-alt" isDark={isDark} />
+
+                  <ImageUploadField
+                    label="Featured Cover Image (Upload or enter URL)"
+                    value={modalData.imageUrl || ''}
+                    onChange={(v) => setModalData({ ...modalData, imageUrl: v })}
+                    isDark={isDark}
+                  />
+
+                  <MultipleImageUploadField
+                    label="Upload Article Images / Diagrams (Optional)"
+                    value={modalData.images || []}
+                    onChange={(v) => setModalData({ ...modalData, images: v })}
+                    isDark={isDark}
+                  />
+
+                  <FormTextarea
+                    label="Excerpt / Snippet (Short summary shown on cards)"
+                    value={modalData.snippet || ''}
+                    onChange={(v) => setModalData({ ...modalData, snippet: v })}
+                    isDark={isDark}
+                  />
+
+                  <FormTextarea
+                    label="Content / Body (Full article content / Markdown / HTML)"
+                    value={modalData.content || ''}
+                    onChange={(v) => {
+                      const words = v.trim().split(/\s+/).filter(Boolean).length;
+                      const calculated = `${Math.max(1, Math.ceil(words / 200))} min read`;
+                      setModalData({
+                        ...modalData,
+                        content: v,
+                        readingTime: modalData.readingTime && modalData.readingTime !== '3 min read' && modalData.readingTime !== '1 min read' ? modalData.readingTime : calculated,
+                      });
+                    }}
+                    isDark={isDark}
+                  />
+
+                  {/* PUBLISHING */}
+                  <FormSectionHeader title="Publishing & Visibility" icon="fas fa-globe" isDark={isDark} />
+
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '14px' }}>
+                    <div>
+                      <FormSelect
+                        label="Publishing Status"
+                        value={modalData.status || 'Published'}
+                        onChange={(v) => setModalData({
+                          ...modalData,
+                          status: v,
+                          published: v === 'Published',
+                        })}
+                        options={[
+                          { value: 'Published', label: '🟢 Published (Visible on website)' },
+                          { value: 'Draft', label: '🟡 Draft (Hidden / Unpublished)' },
+                          { value: 'Archived', label: '⚪ Archived' },
+                        ]}
+                        isDark={isDark}
+                      />
+                    </div>
+                    <div>
+                      <FormField
+                        label="Posted Date"
+                        type="date"
+                        value={modalData.date || ''}
+                        onChange={(v) => setModalData({ ...modalData, date: v })}
+                        isDark={isDark}
+                      />
+                    </div>
+                    <div>
+                      <FormSelect
+                        label="Featured Post"
+                        value={modalData.featured ? 'Yes' : 'No'}
+                        onChange={(v) => setModalData({ ...modalData, featured: v === 'Yes' })}
+                        options={['No', 'Yes']}
+                        isDark={isDark}
+                      />
+                    </div>
+                    <div>
+                      <FormField
+                        label="Reading Time (e.g. 5 min read)"
+                        value={modalData.readingTime || ''}
+                        onChange={(v) => setModalData({ ...modalData, readingTime: v })}
+                        isDark={isDark}
+                      />
+                    </div>
+                  </div>
+
+                  {/* SEO */}
+                  <FormSectionHeader title="SEO & Search Engines" icon="fas fa-search" isDark={isDark} />
+
+                  <FormField
+                    label="SEO Title (Optional - search engine & social sharing title)"
+                    value={modalData.seoTitle || ''}
+                    onChange={(v) => setModalData({ ...modalData, seoTitle: v })}
+                    isDark={isDark}
+                  />
+
+                  <FormTextarea
+                    label="SEO Description (Optional - concise 150-160 characters summary)"
+                    value={modalData.seoDescription || ''}
+                    onChange={(v) => setModalData({ ...modalData, seoDescription: v })}
+                    isDark={isDark}
+                  />
+
+                  {/* ADMIN */}
+                  <FormSectionHeader title="Admin Notes" icon="fas fa-user-shield" isDark={isDark} />
+
+                  <FormTextarea
+                    label="Additional Information / Notes (Internal admin notes)"
+                    value={modalData.additionalInfo || ''}
+                    onChange={(v) => setModalData({ ...modalData, additionalInfo: v })}
+                    isDark={isDark}
+                  />
                 </>
               )}
 
@@ -563,7 +799,44 @@ export default function AdminDashboard() {
   );
 }
 
-// Subcomponents
+// Helper Functions & Subcomponents
+function slugify(text) {
+  return (text || '')
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/[^\w\-]+/g, '')
+    .replace(/\-\-+/g, '-')
+    .replace(/^-+/, '')
+    .replace(/-+$/, '');
+}
+
+function FormSectionHeader({ title, icon, isDark }) {
+  return (
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: '10px',
+      margin: '22px 0 14px 0',
+      paddingBottom: '8px',
+      borderBottom: `1px solid ${isDark ? '#3f3f46' : '#e2e8f0'}`,
+    }}>
+      {icon && <i className={icon} style={{ color: '#8b5cf6', fontSize: '0.95rem' }}></i>}
+      <h4 style={{
+        margin: 0,
+        fontSize: '0.85rem',
+        fontWeight: 700,
+        color: isDark ? '#e4e4e7' : '#1e293b',
+        letterSpacing: '0.04em',
+        textTransform: 'uppercase',
+      }}>
+        {title}
+      </h4>
+    </div>
+  );
+}
+
 function SidebarItem({ active, icon, label, badge, onClick, isDark }) {
   return (
     <button onClick={onClick} style={{
@@ -962,24 +1235,104 @@ function ListTable({ activeTab, items, onEdit, onDelete, isDark }) {
           </tr>
         </thead>
         <tbody>
-          {items.map((item) => (
-            <tr key={item.id} style={{ borderBottom: `1px solid ${isDark ? '#27272a' : '#f1f5f9'}` }}>
-              <td style={{ padding: '12px', fontWeight: 600 }}>{item.title || item.name || item.company || item.institution || item.platform}</td>
-              <td style={{ padding: '12px', fontSize: '0.85rem', opacity: 0.8 }}>
-                {item.description || item.snippet || item.issuer || item.email || item.url || ''}
-              </td>
-              <td style={{ padding: '12px', textAlign: 'right' }}>
-                {activeTab !== 'messages' && (
-                  <button onClick={() => onEdit(item)} style={{ background: 'none', border: 'none', color: '#3b82f6', cursor: 'pointer', marginRight: '12px' }}>
-                    <i className="fas fa-edit"></i> Edit
+          {items.map((item) => {
+            if (activeTab === 'posts') {
+              const statusColor = item.status === 'Draft' ? '#f59e0b' : item.status === 'Archived' ? '#94a3b8' : '#10b981';
+              return (
+                <tr key={item.id} style={{ borderBottom: `1px solid ${isDark ? '#27272a' : '#f1f5f9'}` }}>
+                  <td style={{ padding: '12px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                      {item.imageUrl && (
+                        <img
+                          src={item.imageUrl}
+                          alt={item.title || 'Post'}
+                          style={{ width: '48px', height: '48px', objectFit: 'cover', borderRadius: '8px', border: `1px solid ${isDark ? '#3f3f46' : '#e2e8f0'}` }}
+                        />
+                      )}
+                      <div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', marginBottom: '4px' }}>
+                          <span style={{ fontWeight: 700, fontSize: '0.95rem' }}>{item.title || 'Untitled Post'}</span>
+                          {item.featured && (
+                            <span style={{ fontSize: '0.7rem', padding: '2px 7px', borderRadius: '12px', background: '#fef3c7', color: '#b45309', fontWeight: 700 }}>
+                              ⭐ Featured
+                            </span>
+                          )}
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+                          {item.postType && (
+                            <span style={{ fontSize: '0.7rem', padding: '2px 8px', borderRadius: '6px', background: '#7c3aed25', color: '#a78bfa', fontWeight: 600 }}>
+                              {item.postType}
+                            </span>
+                          )}
+                          {item.category && (
+                            <span style={{ fontSize: '0.7rem', padding: '2px 8px', borderRadius: '6px', background: isDark ? '#27272a' : '#f1f5f9', color: isDark ? '#d4d4d8' : '#475569', fontWeight: 500 }}>
+                              {item.category}
+                            </span>
+                          )}
+                          {item.slug && (
+                            <span style={{ fontSize: '0.75rem', opacity: 0.6, fontFamily: 'monospace' }}>
+                              /{item.slug}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td style={{ padding: '12px', fontSize: '0.85rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px', flexWrap: 'wrap' }}>
+                      <span style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '5px',
+                        fontSize: '0.75rem',
+                        padding: '2px 8px',
+                        borderRadius: '12px',
+                        background: `${statusColor}20`,
+                        color: statusColor,
+                        fontWeight: 600,
+                      }}>
+                        <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: statusColor }}></span>
+                        {item.status || (item.published ? 'Published' : 'Draft')}
+                      </span>
+                      {item.readingTime && <span style={{ opacity: 0.7, fontSize: '0.75rem' }}><i className="far fa-clock" style={{ marginRight: '4px' }}></i>{item.readingTime}</span>}
+                      {item.date && <span style={{ opacity: 0.7, fontSize: '0.75rem' }}><i className="far fa-calendar-alt" style={{ marginRight: '4px' }}></i>{item.date}</span>}
+                      {item.author && <span style={{ opacity: 0.7, fontSize: '0.75rem' }}><i className="far fa-user" style={{ marginRight: '4px' }}></i>{item.author}</span>}
+                    </div>
+                    <div style={{ opacity: 0.8, fontSize: '0.8rem', maxWidth: '380px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      {item.snippet || item.content || 'No excerpt'}
+                    </div>
+                  </td>
+                  <td style={{ padding: '12px', textAlign: 'right' }}>
+                    <button onClick={() => onEdit(item)} style={{ background: 'none', border: 'none', color: '#3b82f6', cursor: 'pointer', marginRight: '12px' }}>
+                      <i className="fas fa-edit"></i> Edit
+                    </button>
+                    <button onClick={() => onDelete(item.id)} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer' }}>
+                      <i className="fas fa-trash"></i> Delete
+                    </button>
+                  </td>
+                </tr>
+              );
+            }
+
+            return (
+              <tr key={item.id} style={{ borderBottom: `1px solid ${isDark ? '#27272a' : '#f1f5f9'}` }}>
+                <td style={{ padding: '12px', fontWeight: 600 }}>{item.title || item.name || item.company || item.institution || item.platform}</td>
+                <td style={{ padding: '12px', fontSize: '0.85rem', opacity: 0.8 }}>
+                  {item.description || item.snippet || item.issuer || item.email || item.url || ''}
+                </td>
+                <td style={{ padding: '12px', textAlign: 'right' }}>
+                  {activeTab !== 'messages' && (
+                    <button onClick={() => onEdit(item)} style={{ background: 'none', border: 'none', color: '#3b82f6', cursor: 'pointer', marginRight: '12px' }}>
+                      <i className="fas fa-edit"></i> Edit
+                    </button>
+                  )}
+                  <button onClick={() => onDelete(item.id)} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer' }}>
+                    <i className="fas fa-trash"></i> Delete
                   </button>
-                )}
-                <button onClick={() => onDelete(item.id)} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer' }}>
-                  <i className="fas fa-trash"></i> Delete
-                </button>
-              </td>
-            </tr>
-          ))}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

@@ -77,19 +77,19 @@ export async function getModuleItems(module) {
     switch (module) {
       case 'profile':
         res = prisma.profile ? await prisma.profile.findFirst() : null;
-        return res || getLocalData().profile;
+        return res || null;
       case 'services':
         res = prisma.service ? await prisma.service.findMany({ orderBy: { id: 'asc' } }) : null;
-        return (res && res.length > 0) ? res : getLocalData().services;
+        return res || [];
       case 'projects':
         res = prisma.project ? await prisma.project.findMany({ orderBy: { id: 'desc' } }) : null;
-        return (res && res.length > 0) ? res : getLocalData().projects;
+        return res || [];
       case 'achievements':
         res = prisma.achievement ? await prisma.achievement.findMany({ orderBy: { createdAt: 'desc' } }) : null;
-        return (res && res.length > 0) ? res : getLocalData().achievements;
+        return res || [];
       case 'certifications':
         res = prisma.certification ? await prisma.certification.findMany({ orderBy: { id: 'desc' } }) : null;
-        return (res && res.length > 0) ? res : getLocalData().certifications;
+        return res || [];
       case 'posts':
         res = prisma.post ? await prisma.post.findMany({ orderBy: { createdAt: 'desc' } }) : null;
         return res || [];
@@ -110,12 +110,19 @@ export async function getModuleItems(module) {
         return res || [];
       case 'site-settings':
         res = prisma.siteSetting ? await prisma.siteSetting.findFirst() : null;
-        return res || getLocalData().siteSettings;
+        return res || null;
       default:
         return [];
     }
   } catch (err) {
-    console.error(`Database query notice for ${module}:`, err.message);
+    console.error(`Database query error for ${module}:`, err.message);
+    // Only fall back to local data if DB is unreachable (development fallback)
+    const isServerless = process.env.VERCEL || process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.NODE_ENV === 'production';
+    if (isServerless) {
+      // In production, return empty rather than stale local data
+      if (module === 'profile' || module === 'site-settings') return null;
+      return [];
+    }
     const local = getLocalData();
     if (module === 'profile') return local.profile;
     if (module === 'site-settings') return local.siteSettings;
@@ -143,7 +150,21 @@ export async function saveModuleItem(module, body, id = null) {
         case 'projects': resultItem = await prisma.project.update({ where: { id: numId }, data: body }); break;
         case 'achievements': resultItem = await prisma.achievement.update({ where: { id: numId }, data: body }); break;
         case 'certifications': resultItem = await prisma.certification.update({ where: { id: numId }, data: body }); break;
-        case 'posts': resultItem = await prisma.post.update({ where: { id: numId }, data: body }); break;
+        case 'posts': {
+          const postData = { ...body };
+          delete postData.id;
+          delete postData.createdAt;
+          delete postData.updatedAt;
+          if (typeof postData.tags === 'string') {
+            postData.tags = postData.tags.split(',').map(t => t.trim()).filter(Boolean);
+          }
+          if (postData.featured !== undefined) postData.featured = Boolean(postData.featured);
+          if (postData.published === undefined && postData.status) {
+            postData.published = postData.status === 'Published';
+          }
+          resultItem = await prisma.post.update({ where: { id: numId }, data: postData });
+          break;
+        }
         case 'skills': resultItem = await prisma.skill.update({ where: { id: numId }, data: body }); break;
         case 'experiences': resultItem = await prisma.experience.update({ where: { id: numId }, data: body }); break;
         case 'educations': resultItem = await prisma.education.update({ where: { id: numId }, data: body }); break;
@@ -156,7 +177,30 @@ export async function saveModuleItem(module, body, id = null) {
         case 'projects': resultItem = await prisma.project.create({ data: body }); break;
         case 'achievements': resultItem = await prisma.achievement.create({ data: body }); break;
         case 'certifications': resultItem = await prisma.certification.create({ data: body }); break;
-        case 'posts': resultItem = await prisma.post.create({ data: body }); break;
+        case 'posts': {
+          const postData = {
+            title: body.title || '',
+            slug: body.slug || null,
+            postType: body.postType || 'BLOG',
+            category: body.category || 'Software Engineering',
+            author: body.author || 'Abdimajid Ali Moalim',
+            tags: Array.isArray(body.tags) ? body.tags : (typeof body.tags === 'string' ? body.tags.split(',').map(t => t.trim()).filter(Boolean) : []),
+            imageUrl: body.imageUrl || null,
+            images: Array.isArray(body.images) ? body.images : [],
+            snippet: body.snippet || '',
+            content: body.content || '',
+            status: body.status || (body.published === false ? 'Draft' : 'Published'),
+            published: body.published !== undefined ? Boolean(body.published) : (body.status !== 'Draft'),
+            featured: Boolean(body.featured),
+            readingTime: body.readingTime || '3 min read',
+            date: body.date || null,
+            seoTitle: body.seoTitle || null,
+            seoDescription: body.seoDescription || null,
+            additionalInfo: body.additionalInfo || null,
+          };
+          resultItem = await prisma.post.create({ data: postData });
+          break;
+        }
         case 'skills': resultItem = await prisma.skill.create({ data: body }); break;
         case 'experiences': resultItem = await prisma.experience.create({ data: body }); break;
         case 'educations': resultItem = await prisma.education.create({ data: body }); break;

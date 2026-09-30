@@ -99,14 +99,24 @@ model Post {
   id             Int      @id @default(autoincrement())
   title          String?  @default("")
   slug           String?
+  postType       String?  @default("BLOG") // BLOG, OPINION, ARTICLE, NEWS, TUTORIAL, ANNOUNCEMENT
+  category       String?  @default("Software Engineering")
+  author         String?  @default("Abdimajid Ali Moalim")
+  tags           String[]
+  imageUrl       String?
+  images         String[]
   snippet        String?  @default("")
   content        String?  @default("")
-  tags           String[]
+  status         String?  @default("Published") // Draft, Published, Archived
   published      Boolean  @default(true)
+  featured       Boolean  @default(false)
+  readingTime    String?  @default("3 min read")
   date           String?
+  seoTitle       String?
+  seoDescription String?
   additionalInfo String?
-  images         String[]
   createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now()) @updatedAt
 }
 
 model Skill {

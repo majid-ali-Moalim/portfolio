@@ -50,6 +50,10 @@ export async function POST(request, { params }) {
     revalidatePath('/');
     revalidatePath('/admin', 'layout');
     revalidatePath('/admin');
+    if (module === 'posts') {
+      revalidatePath('/blog', 'layout');
+      revalidatePath('/blog');
+    }
     const response = NextResponse.json(saved, { status: 201 });
     // Prevent caching of this response
     response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');

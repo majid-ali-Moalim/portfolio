@@ -360,7 +360,83 @@
       "credentialUrl": ""
     }
   ],
-  "posts": [],
+  "posts": [
+    {
+      "id": 4,
+      "createdAt": "2026-09-30T18:47:46.806Z",
+      "title": "kk",
+      "slug": "kk",
+      "postType": "BLOG",
+      "category": "Software Engineering",
+      "author": "Abdimajid Ali Moalim",
+      "tags": [
+        "kk"
+      ],
+      "imageUrl": "/uploads/1790794049371_Gemini_Generated_Image_88mdtr88mdtr88md.jpg",
+      "images": [],
+      "snippet": "hh",
+      "content": "jj",
+      "status": "Published",
+      "published": true,
+      "featured": true,
+      "date": "2026-09-30",
+      "readingTime": "1 min read",
+      "seoTitle": "jjj",
+      "seoDescription": "jjjj",
+      "additionalInfo": "jjj"
+    },
+    {
+      "id": 3,
+      "createdAt": "2026-09-30T18:46:23.669Z",
+      "title": "Test Blog Post",
+      "slug": "test-blog-post",
+      "postType": "BLOG",
+      "category": "Software Engineering",
+      "author": "Abdimajid Ali Moalim",
+      "tags": [
+        "test",
+        "blog"
+      ],
+      "snippet": "A test blog post snippet.",
+      "content": "This is the full content of the test blog post.",
+      "status": "Published",
+      "published": true,
+      "featured": false,
+      "readingTime": "1 min read",
+      "date": "2026-09-30"
+    },
+    {
+      "id": 2,
+      "createdAt": "2026-09-30T18:20:32.133Z",
+      "title": "Why People Fear AI Will Replace Their Jobs",
+      "slug": "why-people-fear-ai-will-replace-their-jobs",
+      "postType": "BLOG",
+      "category": "Artificial Intelligence",
+      "author": "Abdimajid Ali Moalim",
+      "tags": [
+        "Artificial Intelligence",
+        "AI",
+        "Future of Work",
+        "Automation",
+        "Career",
+        "Technology",
+        "Skills",
+        "Digital Transformation"
+      ],
+      "imageUrl": "/uploads/1790792371810_Gemini_Generated_Image_88mdtr88mdtr88md.jpg",
+      "images": [],
+      "snippet": "AI is changing how people work, creating understandable fears about job replacement. But the future may be less about humans versus AI and more about how people learn to work effectively alongside it.",
+      "content": "\n\nWhy People Fear AI Will Replace Their Jobs\n\nArtificial Intelligence has moved from being a futuristic idea to becoming part of everyday work. People now use AI to write, analyze data, generate images, write software, automate repetitive tasks, and solve complex problems. As these capabilities continue to grow, many people are asking an important question: Will AI replace my job?\n\nThis fear is understandable.\n\nFor many people, a job is more than a source of income. It provides stability, identity, experience, and a sense of purpose. When a technology appears capable of performing tasks that humans have traditionally done, it can create uncertainty about what the future of work will look like.\n\nWhy Are People Afraid of AI?\n\nOne major reason is the speed at which AI is improving. Previous technologies often automated specific physical or repetitive tasks. Modern AI can also work with language, images, software, data, and other forms of knowledge.\n\nAnother reason is uncertainty. People may not know which skills will remain valuable or how quickly their industry will change. A person who has spent years developing expertise in a particular task may worry that an AI system could perform part of that task faster or more efficiently.\n\nThere is also concern about economic change. If organizations can automate certain activities, employees may worry about changing responsibilities, reduced opportunities, or the need to learn new skills.\n\nAI Does Not Necessarily Mean Human Workers Become Irrelevant\n\nIt is important to distinguish between automating a task and replacing an entire role.\n\nMany jobs consist of dozens of different tasks. AI may be able to automate some of them while humans continue to handle communication, decision-making, leadership, responsibility, creativity, collaboration, and situations that require context and judgment.\n\nFor example, a software developer can use AI to generate code, explain errors, or create a first draft of a solution. The developer still needs to understand the problem, evaluate the generated code, make architectural decisions, test the system, and take responsibility for the final product.\n\nThe same principle can apply across many professions.\n\nThe Bigger Change: People Working With AI\n\nInstead of thinking only about humans versus AI, we should also think about humans with AI.\n\nA person who understands how to use AI effectively can potentially complete certain tasks more efficiently. This means future careers may increasingly reward people who combine domain knowledge with technology skills.\n\nThe valuable skill may not simply be knowing how to use an AI tool. It may be knowing when to use it, how to give it useful instructions, how to verify its output, and when human judgment should take over.\n\nWhat Should People Do?\n\nThe answer is not to ignore AI.\n\nPeople can focus on continuously developing their skills. Depending on their field, this could include technology literacy, data analysis, communication, critical thinking, cybersecurity, problem-solving, creativity, leadership, and domain-specific expertise.\n\nStudents and professionals can also experiment with AI responsibly. Learning how these systems work and understanding their limitations can help reduce uncertainty and create new opportunities.\n\nThe Future Is Still Being Written\n\nAI will certainly change many jobs. Some tasks will become automated, some roles will change, and new types of work may emerge. The exact impact will vary by industry, organization, technology, and the decisions people make about how AI is deployed.\n\nThe important lesson is that technological change does not automatically mean the end of human contribution.\n\nAI can be viewed as a tool that changes how we work rather than automatically determining whether humans have a role.\n\nThe future of work will depend not only on what AI can do, but also on how people choose to adapt, learn, and work alongside it.\n\nAI may change the workplace, but our ability to learn and adapt remains one of our most valuable skills.",
+      "status": "Published",
+      "published": true,
+      "featured": true,
+      "date": "2026-09-30",
+      "readingTime": "5 min read",
+      "seoTitle": "Why People Fear AI Will Replace Their Jobs | AI & Future of Work",
+      "seoDescription": "Explore why people fear AI will replace their jobs and how adapting skills, human judgment, and AI collaboration may shape the future of work.",
+      "additionalInfo": "Content / Body:\n\nWhy People Fear AI Will Replace Their Jobs\n\nArtificial Intelligence has moved from being a futuristic idea to becoming part of everyday work. People now use AI to write, analyze data, generate images, write software, automate repetitive tasks, and solve complex problems. As these capabilities continue to grow, many people are asking an important question: Will AI replace my job?\n\nThis fear is understandable.\n\nFor many people, a job is more than a source of income. It provides stability, identity, experience, and a sense of purpose. When a technology appears capable of performing tasks that humans have traditionally done, it can create uncertainty about what the future of work will look like.\n\nWhy Are People Afraid of AI?\n\nOne major reason is the speed at which AI is improving. Previous technologies often automated specific physical or repetitive tasks. Modern AI can also work with language, images, software, data, and other forms of knowledge.\n\nAnother reason is uncertainty. People may not know which skills will remain valuable or how quickly their industry will change. A person who has spent years developing expertise in a particular task may worry that an AI system could perform part of that task faster or more efficiently.\n\nThere is also concern about economic change. If organizations can automate certain activities, employees may worry about changing responsibilities, reduced opportunities, or the need to learn new skills.\n\nAI Does Not Necessarily Mean Human Workers Become Irrelevant\n\nIt is important to distinguish between automating a task and replacing an entire role.\n\nMany jobs consist of dozens of different tasks. AI may be able to automate some of them while humans continue to handle communication, decision-making, leadership, responsibility, creativity, collaboration, and situations that require context and judgment.\n\nFor example, a software developer can use AI to generate code, explain errors, or create a first draft of a solution. The developer still needs to understand the problem, evaluate the generated code, make architectural decisions, test the system, and take responsibility for the final product.\n\nThe same principle can apply across many professions.\n\nThe Bigger Change: People Working With AI\n\nInstead of thinking only about humans versus AI, we should also think about humans with AI.\n\nA person who understands how to use AI effectively can potentially complete certain tasks more efficiently. This means future careers may increasingly reward people who combine domain knowledge with technology skills.\n\nThe valuable skill may not simply be knowing how to use an AI tool. It may be knowing when to use it, how to give it useful instructions, how to verify its output, and when human judgment should take over.\n\nWhat Should People Do?\n\nThe answer is not to ignore AI.\n\nPeople can focus on continuously developing their skills. Depending on their field, this could include technology literacy, data analysis, communication, critical thinking, cybersecurity, problem-solving, creativity, leadership, and domain-specific expertise.\n\nStudents and professionals can also experiment with AI responsibly. Learning how these systems work and understanding their limitations can help reduce uncertainty and create new opportunities.\n\nThe Future Is Still Being Written\n\nAI will certainly change many jobs. Some tasks will become automated, some roles will change, and new types of work may emerge. The exact impact will vary by industry, organization, technology, and the decisions people make about how AI is deployed.\n\nThe important lesson is that technological change does not automatically mean the end of human contribution.\n\nAI can be viewed as a tool that changes how we work rather than automatically determining whether humans have a role.\n\nThe future of work will depend not only on what AI can do, but also on how people choose to adapt, learn, and work alongside it.\n\nAI may change the workplace, but our ability to learn and adapt remains one of our most valuable skills."
+    }
+  ],
   "skills": [],
   "experiences": [],
   "educations": [],

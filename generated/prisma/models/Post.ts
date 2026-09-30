@@ -38,38 +38,68 @@ export type PostMinAggregateOutputType = {
   id: number | null
   title: string | null
   slug: string | null
+  postType: string | null
+  category: string | null
+  author: string | null
+  imageUrl: string | null
   snippet: string | null
   content: string | null
+  status: string | null
   published: boolean | null
+  featured: boolean | null
+  readingTime: string | null
   date: string | null
+  seoTitle: string | null
+  seoDescription: string | null
   additionalInfo: string | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type PostMaxAggregateOutputType = {
   id: number | null
   title: string | null
   slug: string | null
+  postType: string | null
+  category: string | null
+  author: string | null
+  imageUrl: string | null
   snippet: string | null
   content: string | null
+  status: string | null
   published: boolean | null
+  featured: boolean | null
+  readingTime: string | null
   date: string | null
+  seoTitle: string | null
+  seoDescription: string | null
   additionalInfo: string | null
   createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type PostCountAggregateOutputType = {
   id: number
   title: number
   slug: number
+  postType: number
+  category: number
+  author: number
+  tags: number
+  imageUrl: number
+  images: number
   snippet: number
   content: number
-  tags: number
+  status: number
   published: number
+  featured: number
+  readingTime: number
   date: number
+  seoTitle: number
+  seoDescription: number
   additionalInfo: number
-  images: number
   createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -86,38 +116,68 @@ export type PostMinAggregateInputType = {
   id?: true
   title?: true
   slug?: true
+  postType?: true
+  category?: true
+  author?: true
+  imageUrl?: true
   snippet?: true
   content?: true
+  status?: true
   published?: true
+  featured?: true
+  readingTime?: true
   date?: true
+  seoTitle?: true
+  seoDescription?: true
   additionalInfo?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type PostMaxAggregateInputType = {
   id?: true
   title?: true
   slug?: true
+  postType?: true
+  category?: true
+  author?: true
+  imageUrl?: true
   snippet?: true
   content?: true
+  status?: true
   published?: true
+  featured?: true
+  readingTime?: true
   date?: true
+  seoTitle?: true
+  seoDescription?: true
   additionalInfo?: true
   createdAt?: true
+  updatedAt?: true
 }
 
 export type PostCountAggregateInputType = {
   id?: true
   title?: true
   slug?: true
+  postType?: true
+  category?: true
+  author?: true
+  tags?: true
+  imageUrl?: true
+  images?: true
   snippet?: true
   content?: true
-  tags?: true
+  status?: true
   published?: true
+  featured?: true
+  readingTime?: true
   date?: true
+  seoTitle?: true
+  seoDescription?: true
   additionalInfo?: true
-  images?: true
   createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -211,14 +271,24 @@ export type PostGroupByOutputType = {
   id: number
   title: string | null
   slug: string | null
+  postType: string | null
+  category: string | null
+  author: string | null
+  tags: string[]
+  imageUrl: string | null
+  images: string[]
   snippet: string | null
   content: string | null
-  tags: string[]
+  status: string | null
   published: boolean
+  featured: boolean
+  readingTime: string | null
   date: string | null
+  seoTitle: string | null
+  seoDescription: string | null
   additionalInfo: string | null
-  images: string[]
   createdAt: Date
+  updatedAt: Date
   _count: PostCountAggregateOutputType | null
   _avg: PostAvgAggregateOutputType | null
   _sum: PostSumAggregateOutputType | null
@@ -248,28 +318,48 @@ export type PostWhereInput = {
   id?: Prisma.IntFilter<"Post"> | number
   title?: Prisma.StringNullableFilter<"Post"> | string | null
   slug?: Prisma.StringNullableFilter<"Post"> | string | null
+  postType?: Prisma.StringNullableFilter<"Post"> | string | null
+  category?: Prisma.StringNullableFilter<"Post"> | string | null
+  author?: Prisma.StringNullableFilter<"Post"> | string | null
+  tags?: Prisma.StringNullableListFilter<"Post">
+  imageUrl?: Prisma.StringNullableFilter<"Post"> | string | null
+  images?: Prisma.StringNullableListFilter<"Post">
   snippet?: Prisma.StringNullableFilter<"Post"> | string | null
   content?: Prisma.StringNullableFilter<"Post"> | string | null
-  tags?: Prisma.StringNullableListFilter<"Post">
+  status?: Prisma.StringNullableFilter<"Post"> | string | null
   published?: Prisma.BoolFilter<"Post"> | boolean
+  featured?: Prisma.BoolFilter<"Post"> | boolean
+  readingTime?: Prisma.StringNullableFilter<"Post"> | string | null
   date?: Prisma.StringNullableFilter<"Post"> | string | null
+  seoTitle?: Prisma.StringNullableFilter<"Post"> | string | null
+  seoDescription?: Prisma.StringNullableFilter<"Post"> | string | null
   additionalInfo?: Prisma.StringNullableFilter<"Post"> | string | null
-  images?: Prisma.StringNullableListFilter<"Post">
   createdAt?: Prisma.DateTimeFilter<"Post"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Post"> | Date | string
 }
 
 export type PostOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrderInput | Prisma.SortOrder
   slug?: Prisma.SortOrderInput | Prisma.SortOrder
+  postType?: Prisma.SortOrderInput | Prisma.SortOrder
+  category?: Prisma.SortOrderInput | Prisma.SortOrder
+  author?: Prisma.SortOrderInput | Prisma.SortOrder
+  tags?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  images?: Prisma.SortOrder
   snippet?: Prisma.SortOrderInput | Prisma.SortOrder
   content?: Prisma.SortOrderInput | Prisma.SortOrder
-  tags?: Prisma.SortOrder
+  status?: Prisma.SortOrderInput | Prisma.SortOrder
   published?: Prisma.SortOrder
+  featured?: Prisma.SortOrder
+  readingTime?: Prisma.SortOrderInput | Prisma.SortOrder
   date?: Prisma.SortOrderInput | Prisma.SortOrder
+  seoTitle?: Prisma.SortOrderInput | Prisma.SortOrder
+  seoDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   additionalInfo?: Prisma.SortOrderInput | Prisma.SortOrder
-  images?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type PostWhereUniqueInput = Prisma.AtLeast<{
@@ -279,28 +369,48 @@ export type PostWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.PostWhereInput | Prisma.PostWhereInput[]
   title?: Prisma.StringNullableFilter<"Post"> | string | null
   slug?: Prisma.StringNullableFilter<"Post"> | string | null
+  postType?: Prisma.StringNullableFilter<"Post"> | string | null
+  category?: Prisma.StringNullableFilter<"Post"> | string | null
+  author?: Prisma.StringNullableFilter<"Post"> | string | null
+  tags?: Prisma.StringNullableListFilter<"Post">
+  imageUrl?: Prisma.StringNullableFilter<"Post"> | string | null
+  images?: Prisma.StringNullableListFilter<"Post">
   snippet?: Prisma.StringNullableFilter<"Post"> | string | null
   content?: Prisma.StringNullableFilter<"Post"> | string | null
-  tags?: Prisma.StringNullableListFilter<"Post">
+  status?: Prisma.StringNullableFilter<"Post"> | string | null
   published?: Prisma.BoolFilter<"Post"> | boolean
+  featured?: Prisma.BoolFilter<"Post"> | boolean
+  readingTime?: Prisma.StringNullableFilter<"Post"> | string | null
   date?: Prisma.StringNullableFilter<"Post"> | string | null
+  seoTitle?: Prisma.StringNullableFilter<"Post"> | string | null
+  seoDescription?: Prisma.StringNullableFilter<"Post"> | string | null
   additionalInfo?: Prisma.StringNullableFilter<"Post"> | string | null
-  images?: Prisma.StringNullableListFilter<"Post">
   createdAt?: Prisma.DateTimeFilter<"Post"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Post"> | Date | string
 }, "id">
 
 export type PostOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrderInput | Prisma.SortOrder
   slug?: Prisma.SortOrderInput | Prisma.SortOrder
+  postType?: Prisma.SortOrderInput | Prisma.SortOrder
+  category?: Prisma.SortOrderInput | Prisma.SortOrder
+  author?: Prisma.SortOrderInput | Prisma.SortOrder
+  tags?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  images?: Prisma.SortOrder
   snippet?: Prisma.SortOrderInput | Prisma.SortOrder
   content?: Prisma.SortOrderInput | Prisma.SortOrder
-  tags?: Prisma.SortOrder
+  status?: Prisma.SortOrderInput | Prisma.SortOrder
   published?: Prisma.SortOrder
+  featured?: Prisma.SortOrder
+  readingTime?: Prisma.SortOrderInput | Prisma.SortOrder
   date?: Prisma.SortOrderInput | Prisma.SortOrder
+  seoTitle?: Prisma.SortOrderInput | Prisma.SortOrder
+  seoDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   additionalInfo?: Prisma.SortOrderInput | Prisma.SortOrder
-  images?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.PostCountOrderByAggregateInput
   _avg?: Prisma.PostAvgOrderByAggregateInput
   _max?: Prisma.PostMaxOrderByAggregateInput
@@ -315,123 +425,213 @@ export type PostScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"Post"> | number
   title?: Prisma.StringNullableWithAggregatesFilter<"Post"> | string | null
   slug?: Prisma.StringNullableWithAggregatesFilter<"Post"> | string | null
+  postType?: Prisma.StringNullableWithAggregatesFilter<"Post"> | string | null
+  category?: Prisma.StringNullableWithAggregatesFilter<"Post"> | string | null
+  author?: Prisma.StringNullableWithAggregatesFilter<"Post"> | string | null
+  tags?: Prisma.StringNullableListFilter<"Post">
+  imageUrl?: Prisma.StringNullableWithAggregatesFilter<"Post"> | string | null
+  images?: Prisma.StringNullableListFilter<"Post">
   snippet?: Prisma.StringNullableWithAggregatesFilter<"Post"> | string | null
   content?: Prisma.StringNullableWithAggregatesFilter<"Post"> | string | null
-  tags?: Prisma.StringNullableListFilter<"Post">
+  status?: Prisma.StringNullableWithAggregatesFilter<"Post"> | string | null
   published?: Prisma.BoolWithAggregatesFilter<"Post"> | boolean
+  featured?: Prisma.BoolWithAggregatesFilter<"Post"> | boolean
+  readingTime?: Prisma.StringNullableWithAggregatesFilter<"Post"> | string | null
   date?: Prisma.StringNullableWithAggregatesFilter<"Post"> | string | null
+  seoTitle?: Prisma.StringNullableWithAggregatesFilter<"Post"> | string | null
+  seoDescription?: Prisma.StringNullableWithAggregatesFilter<"Post"> | string | null
   additionalInfo?: Prisma.StringNullableWithAggregatesFilter<"Post"> | string | null
-  images?: Prisma.StringNullableListFilter<"Post">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Post"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Post"> | Date | string
 }
 
 export type PostCreateInput = {
   title?: string | null
   slug?: string | null
+  postType?: string | null
+  category?: string | null
+  author?: string | null
+  tags?: Prisma.PostCreatetagsInput | string[]
+  imageUrl?: string | null
+  images?: Prisma.PostCreateimagesInput | string[]
   snippet?: string | null
   content?: string | null
-  tags?: Prisma.PostCreatetagsInput | string[]
+  status?: string | null
   published?: boolean
+  featured?: boolean
+  readingTime?: string | null
   date?: string | null
+  seoTitle?: string | null
+  seoDescription?: string | null
   additionalInfo?: string | null
-  images?: Prisma.PostCreateimagesInput | string[]
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type PostUncheckedCreateInput = {
   id?: number
   title?: string | null
   slug?: string | null
+  postType?: string | null
+  category?: string | null
+  author?: string | null
+  tags?: Prisma.PostCreatetagsInput | string[]
+  imageUrl?: string | null
+  images?: Prisma.PostCreateimagesInput | string[]
   snippet?: string | null
   content?: string | null
-  tags?: Prisma.PostCreatetagsInput | string[]
+  status?: string | null
   published?: boolean
+  featured?: boolean
+  readingTime?: string | null
   date?: string | null
+  seoTitle?: string | null
+  seoDescription?: string | null
   additionalInfo?: string | null
-  images?: Prisma.PostCreateimagesInput | string[]
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type PostUpdateInput = {
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  author?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.PostUpdatetagsInput | string[]
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  images?: Prisma.PostUpdateimagesInput | string[]
   snippet?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  tags?: Prisma.PostUpdatetagsInput | string[]
+  status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  readingTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   additionalInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  images?: Prisma.PostUpdateimagesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PostUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  author?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.PostUpdatetagsInput | string[]
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  images?: Prisma.PostUpdateimagesInput | string[]
   snippet?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  tags?: Prisma.PostUpdatetagsInput | string[]
+  status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  readingTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   additionalInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  images?: Prisma.PostUpdateimagesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PostCreateManyInput = {
   id?: number
   title?: string | null
   slug?: string | null
+  postType?: string | null
+  category?: string | null
+  author?: string | null
+  tags?: Prisma.PostCreatetagsInput | string[]
+  imageUrl?: string | null
+  images?: Prisma.PostCreateimagesInput | string[]
   snippet?: string | null
   content?: string | null
-  tags?: Prisma.PostCreatetagsInput | string[]
+  status?: string | null
   published?: boolean
+  featured?: boolean
+  readingTime?: string | null
   date?: string | null
+  seoTitle?: string | null
+  seoDescription?: string | null
   additionalInfo?: string | null
-  images?: Prisma.PostCreateimagesInput | string[]
   createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type PostUpdateManyMutationInput = {
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  author?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.PostUpdatetagsInput | string[]
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  images?: Prisma.PostUpdateimagesInput | string[]
   snippet?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  tags?: Prisma.PostUpdatetagsInput | string[]
+  status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  readingTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   additionalInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  images?: Prisma.PostUpdateimagesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PostUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  author?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.PostUpdatetagsInput | string[]
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  images?: Prisma.PostUpdateimagesInput | string[]
   snippet?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  tags?: Prisma.PostUpdatetagsInput | string[]
+  status?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  featured?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  readingTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoTitle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  seoDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   additionalInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  images?: Prisma.PostUpdateimagesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PostCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
+  postType?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  author?: Prisma.SortOrder
+  tags?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrder
+  images?: Prisma.SortOrder
   snippet?: Prisma.SortOrder
   content?: Prisma.SortOrder
-  tags?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   published?: Prisma.SortOrder
+  featured?: Prisma.SortOrder
+  readingTime?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  seoTitle?: Prisma.SortOrder
+  seoDescription?: Prisma.SortOrder
   additionalInfo?: Prisma.SortOrder
-  images?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type PostAvgOrderByAggregateInput = {
@@ -442,24 +642,44 @@ export type PostMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
+  postType?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  author?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrder
   snippet?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   published?: Prisma.SortOrder
+  featured?: Prisma.SortOrder
+  readingTime?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  seoTitle?: Prisma.SortOrder
+  seoDescription?: Prisma.SortOrder
   additionalInfo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type PostMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   slug?: Prisma.SortOrder
+  postType?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  author?: Prisma.SortOrder
+  imageUrl?: Prisma.SortOrder
   snippet?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  status?: Prisma.SortOrder
   published?: Prisma.SortOrder
+  featured?: Prisma.SortOrder
+  readingTime?: Prisma.SortOrder
   date?: Prisma.SortOrder
+  seoTitle?: Prisma.SortOrder
+  seoDescription?: Prisma.SortOrder
   additionalInfo?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type PostSumOrderByAggregateInput = {
@@ -490,59 +710,99 @@ export type PostSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   id?: boolean
   title?: boolean
   slug?: boolean
+  postType?: boolean
+  category?: boolean
+  author?: boolean
+  tags?: boolean
+  imageUrl?: boolean
+  images?: boolean
   snippet?: boolean
   content?: boolean
-  tags?: boolean
+  status?: boolean
   published?: boolean
+  featured?: boolean
+  readingTime?: boolean
   date?: boolean
+  seoTitle?: boolean
+  seoDescription?: boolean
   additionalInfo?: boolean
-  images?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["post"]>
 
 export type PostSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
   slug?: boolean
+  postType?: boolean
+  category?: boolean
+  author?: boolean
+  tags?: boolean
+  imageUrl?: boolean
+  images?: boolean
   snippet?: boolean
   content?: boolean
-  tags?: boolean
+  status?: boolean
   published?: boolean
+  featured?: boolean
+  readingTime?: boolean
   date?: boolean
+  seoTitle?: boolean
+  seoDescription?: boolean
   additionalInfo?: boolean
-  images?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["post"]>
 
 export type PostSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
   slug?: boolean
+  postType?: boolean
+  category?: boolean
+  author?: boolean
+  tags?: boolean
+  imageUrl?: boolean
+  images?: boolean
   snippet?: boolean
   content?: boolean
-  tags?: boolean
+  status?: boolean
   published?: boolean
+  featured?: boolean
+  readingTime?: boolean
   date?: boolean
+  seoTitle?: boolean
+  seoDescription?: boolean
   additionalInfo?: boolean
-  images?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["post"]>
 
 export type PostSelectScalar = {
   id?: boolean
   title?: boolean
   slug?: boolean
+  postType?: boolean
+  category?: boolean
+  author?: boolean
+  tags?: boolean
+  imageUrl?: boolean
+  images?: boolean
   snippet?: boolean
   content?: boolean
-  tags?: boolean
+  status?: boolean
   published?: boolean
+  featured?: boolean
+  readingTime?: boolean
   date?: boolean
+  seoTitle?: boolean
+  seoDescription?: boolean
   additionalInfo?: boolean
-  images?: boolean
   createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type PostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "snippet" | "content" | "tags" | "published" | "date" | "additionalInfo" | "images" | "createdAt", ExtArgs["result"]["post"]>
+export type PostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "postType" | "category" | "author" | "tags" | "imageUrl" | "images" | "snippet" | "content" | "status" | "published" | "featured" | "readingTime" | "date" | "seoTitle" | "seoDescription" | "additionalInfo" | "createdAt" | "updatedAt", ExtArgs["result"]["post"]>
 
 export type $PostPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Post"
@@ -551,14 +811,24 @@ export type $PostPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     id: number
     title: string | null
     slug: string | null
+    postType: string | null
+    category: string | null
+    author: string | null
+    tags: string[]
+    imageUrl: string | null
+    images: string[]
     snippet: string | null
     content: string | null
-    tags: string[]
+    status: string | null
     published: boolean
+    featured: boolean
+    readingTime: string | null
     date: string | null
+    seoTitle: string | null
+    seoDescription: string | null
     additionalInfo: string | null
-    images: string[]
     createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["post"]>
   composites: {}
 }
@@ -985,14 +1255,24 @@ export interface PostFieldRefs {
   readonly id: Prisma.FieldRef<"Post", 'Int'>
   readonly title: Prisma.FieldRef<"Post", 'String'>
   readonly slug: Prisma.FieldRef<"Post", 'String'>
+  readonly postType: Prisma.FieldRef<"Post", 'String'>
+  readonly category: Prisma.FieldRef<"Post", 'String'>
+  readonly author: Prisma.FieldRef<"Post", 'String'>
+  readonly tags: Prisma.FieldRef<"Post", 'String[]'>
+  readonly imageUrl: Prisma.FieldRef<"Post", 'String'>
+  readonly images: Prisma.FieldRef<"Post", 'String[]'>
   readonly snippet: Prisma.FieldRef<"Post", 'String'>
   readonly content: Prisma.FieldRef<"Post", 'String'>
-  readonly tags: Prisma.FieldRef<"Post", 'String[]'>
+  readonly status: Prisma.FieldRef<"Post", 'String'>
   readonly published: Prisma.FieldRef<"Post", 'Boolean'>
+  readonly featured: Prisma.FieldRef<"Post", 'Boolean'>
+  readonly readingTime: Prisma.FieldRef<"Post", 'String'>
   readonly date: Prisma.FieldRef<"Post", 'String'>
+  readonly seoTitle: Prisma.FieldRef<"Post", 'String'>
+  readonly seoDescription: Prisma.FieldRef<"Post", 'String'>
   readonly additionalInfo: Prisma.FieldRef<"Post", 'String'>
-  readonly images: Prisma.FieldRef<"Post", 'String[]'>
   readonly createdAt: Prisma.FieldRef<"Post", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Post", 'DateTime'>
 }
     
 

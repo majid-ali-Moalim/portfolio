@@ -22,6 +22,10 @@ export async function PUT(request, { params }) {
     revalidatePath('/');
     revalidatePath('/admin', 'layout');
     revalidatePath('/admin');
+    if (module === 'posts') {
+      revalidatePath('/blog', 'layout');
+      revalidatePath('/blog');
+    }
     const response = NextResponse.json(updated);
     // Prevent caching of this response
     response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
