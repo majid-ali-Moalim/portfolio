@@ -28,10 +28,12 @@ export type AggregateService = {
 
 export type ServiceAvgAggregateOutputType = {
   id: number | null
+  percentage: number | null
 }
 
 export type ServiceSumAggregateOutputType = {
   id: number | null
+  percentage: number | null
 }
 
 export type ServiceMinAggregateOutputType = {
@@ -42,6 +44,7 @@ export type ServiceMinAggregateOutputType = {
   category: string | null
   date: string | null
   additionalInfo: string | null
+  percentage: number | null
   createdAt: Date | null
 }
 
@@ -53,6 +56,7 @@ export type ServiceMaxAggregateOutputType = {
   category: string | null
   date: string | null
   additionalInfo: string | null
+  percentage: number | null
   createdAt: Date | null
 }
 
@@ -66,6 +70,7 @@ export type ServiceCountAggregateOutputType = {
   date: number
   additionalInfo: number
   images: number
+  percentage: number
   createdAt: number
   _all: number
 }
@@ -73,10 +78,12 @@ export type ServiceCountAggregateOutputType = {
 
 export type ServiceAvgAggregateInputType = {
   id?: true
+  percentage?: true
 }
 
 export type ServiceSumAggregateInputType = {
   id?: true
+  percentage?: true
 }
 
 export type ServiceMinAggregateInputType = {
@@ -87,6 +94,7 @@ export type ServiceMinAggregateInputType = {
   category?: true
   date?: true
   additionalInfo?: true
+  percentage?: true
   createdAt?: true
 }
 
@@ -98,6 +106,7 @@ export type ServiceMaxAggregateInputType = {
   category?: true
   date?: true
   additionalInfo?: true
+  percentage?: true
   createdAt?: true
 }
 
@@ -111,6 +120,7 @@ export type ServiceCountAggregateInputType = {
   date?: true
   additionalInfo?: true
   images?: true
+  percentage?: true
   createdAt?: true
   _all?: true
 }
@@ -211,6 +221,7 @@ export type ServiceGroupByOutputType = {
   date: string | null
   additionalInfo: string | null
   images: string[]
+  percentage: number | null
   createdAt: Date
   _count: ServiceCountAggregateOutputType | null
   _avg: ServiceAvgAggregateOutputType | null
@@ -247,6 +258,7 @@ export type ServiceWhereInput = {
   date?: Prisma.StringNullableFilter<"Service"> | string | null
   additionalInfo?: Prisma.StringNullableFilter<"Service"> | string | null
   images?: Prisma.StringNullableListFilter<"Service">
+  percentage?: Prisma.IntNullableFilter<"Service"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Service"> | Date | string
 }
 
@@ -260,6 +272,7 @@ export type ServiceOrderByWithRelationInput = {
   date?: Prisma.SortOrderInput | Prisma.SortOrder
   additionalInfo?: Prisma.SortOrderInput | Prisma.SortOrder
   images?: Prisma.SortOrder
+  percentage?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -276,6 +289,7 @@ export type ServiceWhereUniqueInput = Prisma.AtLeast<{
   date?: Prisma.StringNullableFilter<"Service"> | string | null
   additionalInfo?: Prisma.StringNullableFilter<"Service"> | string | null
   images?: Prisma.StringNullableListFilter<"Service">
+  percentage?: Prisma.IntNullableFilter<"Service"> | number | null
   createdAt?: Prisma.DateTimeFilter<"Service"> | Date | string
 }, "id">
 
@@ -289,6 +303,7 @@ export type ServiceOrderByWithAggregationInput = {
   date?: Prisma.SortOrderInput | Prisma.SortOrder
   additionalInfo?: Prisma.SortOrderInput | Prisma.SortOrder
   images?: Prisma.SortOrder
+  percentage?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.ServiceCountOrderByAggregateInput
   _avg?: Prisma.ServiceAvgOrderByAggregateInput
@@ -310,6 +325,7 @@ export type ServiceScalarWhereWithAggregatesInput = {
   date?: Prisma.StringNullableWithAggregatesFilter<"Service"> | string | null
   additionalInfo?: Prisma.StringNullableWithAggregatesFilter<"Service"> | string | null
   images?: Prisma.StringNullableListFilter<"Service">
+  percentage?: Prisma.IntNullableWithAggregatesFilter<"Service"> | number | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Service"> | Date | string
 }
 
@@ -322,6 +338,7 @@ export type ServiceCreateInput = {
   date?: string | null
   additionalInfo?: string | null
   images?: Prisma.ServiceCreateimagesInput | string[]
+  percentage?: number | null
   createdAt?: Date | string
 }
 
@@ -335,6 +352,7 @@ export type ServiceUncheckedCreateInput = {
   date?: string | null
   additionalInfo?: string | null
   images?: Prisma.ServiceCreateimagesInput | string[]
+  percentage?: number | null
   createdAt?: Date | string
 }
 
@@ -347,6 +365,7 @@ export type ServiceUpdateInput = {
   date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   additionalInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   images?: Prisma.ServiceUpdateimagesInput | string[]
+  percentage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -360,6 +379,7 @@ export type ServiceUncheckedUpdateInput = {
   date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   additionalInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   images?: Prisma.ServiceUpdateimagesInput | string[]
+  percentage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -373,6 +393,7 @@ export type ServiceCreateManyInput = {
   date?: string | null
   additionalInfo?: string | null
   images?: Prisma.ServiceCreateimagesInput | string[]
+  percentage?: number | null
   createdAt?: Date | string
 }
 
@@ -385,6 +406,7 @@ export type ServiceUpdateManyMutationInput = {
   date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   additionalInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   images?: Prisma.ServiceUpdateimagesInput | string[]
+  percentage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -398,6 +420,7 @@ export type ServiceUncheckedUpdateManyInput = {
   date?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   additionalInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   images?: Prisma.ServiceUpdateimagesInput | string[]
+  percentage?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -419,11 +442,13 @@ export type ServiceCountOrderByAggregateInput = {
   date?: Prisma.SortOrder
   additionalInfo?: Prisma.SortOrder
   images?: Prisma.SortOrder
+  percentage?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type ServiceAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  percentage?: Prisma.SortOrder
 }
 
 export type ServiceMaxOrderByAggregateInput = {
@@ -434,6 +459,7 @@ export type ServiceMaxOrderByAggregateInput = {
   category?: Prisma.SortOrder
   date?: Prisma.SortOrder
   additionalInfo?: Prisma.SortOrder
+  percentage?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -445,11 +471,13 @@ export type ServiceMinOrderByAggregateInput = {
   category?: Prisma.SortOrder
   date?: Prisma.SortOrder
   additionalInfo?: Prisma.SortOrder
+  percentage?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type ServiceSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  percentage?: Prisma.SortOrder
 }
 
 export type ServiceCreatebulletsInput = {
@@ -470,6 +498,14 @@ export type ServiceUpdateimagesInput = {
   push?: string | string[]
 }
 
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 
 
 export type ServiceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -482,6 +518,7 @@ export type ServiceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   date?: boolean
   additionalInfo?: boolean
   images?: boolean
+  percentage?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["service"]>
 
@@ -495,6 +532,7 @@ export type ServiceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   date?: boolean
   additionalInfo?: boolean
   images?: boolean
+  percentage?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["service"]>
 
@@ -508,6 +546,7 @@ export type ServiceSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   date?: boolean
   additionalInfo?: boolean
   images?: boolean
+  percentage?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["service"]>
 
@@ -521,10 +560,11 @@ export type ServiceSelectScalar = {
   date?: boolean
   additionalInfo?: boolean
   images?: boolean
+  percentage?: boolean
   createdAt?: boolean
 }
 
-export type ServiceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "icon" | "bullets" | "category" | "date" | "additionalInfo" | "images" | "createdAt", ExtArgs["result"]["service"]>
+export type ServiceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "icon" | "bullets" | "category" | "date" | "additionalInfo" | "images" | "percentage" | "createdAt", ExtArgs["result"]["service"]>
 
 export type $ServicePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Service"
@@ -539,6 +579,7 @@ export type $ServicePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     date: string | null
     additionalInfo: string | null
     images: string[]
+    percentage: number | null
     createdAt: Date
   }, ExtArgs["result"]["service"]>
   composites: {}
@@ -972,6 +1013,7 @@ export interface ServiceFieldRefs {
   readonly date: Prisma.FieldRef<"Service", 'String'>
   readonly additionalInfo: Prisma.FieldRef<"Service", 'String'>
   readonly images: Prisma.FieldRef<"Service", 'String[]'>
+  readonly percentage: Prisma.FieldRef<"Service", 'Int'>
   readonly createdAt: Prisma.FieldRef<"Service", 'DateTime'>
 }
     

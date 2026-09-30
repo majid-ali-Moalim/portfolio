@@ -72,40 +72,50 @@ function saveLocalData(data) {
 // Unified Get Module Items
 export async function getModuleItems(module) {
   try {
+    if (!prisma) throw new Error('Prisma client not initialized');
+    let res = null;
     switch (module) {
       case 'profile':
-        return await prisma.profile.findFirst();
+        res = prisma.profile ? await prisma.profile.findFirst() : null;
+        return res || getLocalData().profile;
       case 'services':
-        return await prisma.service.findMany({ orderBy: { id: 'asc' } });
+        res = prisma.service ? await prisma.service.findMany({ orderBy: { id: 'asc' } }) : null;
+        return (res && res.length > 0) ? res : getLocalData().services;
       case 'projects':
-        return await prisma.project.findMany({ orderBy: { id: 'desc' } });
+        res = prisma.project ? await prisma.project.findMany({ orderBy: { id: 'desc' } }) : null;
+        return (res && res.length > 0) ? res : getLocalData().projects;
       case 'achievements':
-        return await prisma.achievement.findMany({ orderBy: { createdAt: 'desc' } });
+        res = prisma.achievement ? await prisma.achievement.findMany({ orderBy: { createdAt: 'desc' } }) : null;
+        return (res && res.length > 0) ? res : getLocalData().achievements;
       case 'certifications':
-        return await prisma.certification.findMany({ orderBy: { id: 'desc' } });
+        res = prisma.certification ? await prisma.certification.findMany({ orderBy: { id: 'desc' } }) : null;
+        return (res && res.length > 0) ? res : getLocalData().certifications;
       case 'posts':
-        return await prisma.post.findMany({ orderBy: { createdAt: 'desc' } });
+        res = prisma.post ? await prisma.post.findMany({ orderBy: { createdAt: 'desc' } }) : null;
+        return res || [];
       case 'skills':
-        return await prisma.skill.findMany({ orderBy: { id: 'asc' } });
+        res = prisma.skill ? await prisma.skill.findMany({ orderBy: { id: 'asc' } }) : null;
+        return res || [];
       case 'experiences':
-        return await prisma.experience.findMany({ orderBy: { id: 'desc' } });
+        res = prisma.experience ? await prisma.experience.findMany({ orderBy: { id: 'desc' } }) : null;
+        return res || [];
       case 'educations':
-        return await prisma.education.findMany({ orderBy: { id: 'desc' } });
+        res = prisma.education ? await prisma.education.findMany({ orderBy: { id: 'desc' } }) : null;
+        return res || [];
       case 'messages':
-        return await prisma.message.findMany({ orderBy: { createdAt: 'desc' } });
+        res = prisma.message ? await prisma.message.findMany({ orderBy: { createdAt: 'desc' } }) : null;
+        return res || [];
       case 'social-links':
-        return await prisma.socialLink.findMany({ orderBy: { id: 'asc' } });
+        res = prisma.socialLink ? await prisma.socialLink.findMany({ orderBy: { id: 'asc' } }) : null;
+        return res || [];
       case 'site-settings':
-        return await prisma.siteSetting.findFirst();
+        res = prisma.siteSetting ? await prisma.siteSetting.findFirst() : null;
+        return res || getLocalData().siteSettings;
       default:
         return [];
     }
   } catch (err) {
-    console.error(`Database query error for ${module}:`, err.message);
-    const isServerless = process.env.VERCEL || process.env.NETLIFY || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.NODE_ENV === 'production';
-    if (isServerless) {
-      return module === 'profile' || module === 'site-settings' ? null : [];
-    }
+    console.error(`Database query notice for ${module}:`, err.message);
     const local = getLocalData();
     if (module === 'profile') return local.profile;
     if (module === 'site-settings') return local.siteSettings;
